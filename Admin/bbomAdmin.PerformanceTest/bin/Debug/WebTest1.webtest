@@ -1,2 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<WebTest Name="WebTest1" Id="b1591d76-e3fa-444b-9a9b-1a80d3f38929" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="" ResultsLocale="" />
