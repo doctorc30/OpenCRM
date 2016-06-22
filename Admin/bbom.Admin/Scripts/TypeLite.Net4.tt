@@ -1,0 +1,17 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ assembly name="$(TargetDir)TypeLite.dll" #>
+<#@ assembly name="$(TargetDir)TypeLite.Net4.dll" #>
+<#@ assembly name="$(TargetDir)$(TargetFileName)" #>
+<#@ assembly name="$(TargetDir)bbom.Admin.Core.dll" #>
+
+<#@ import namespace="TypeLite" #> 
+<#@ import namespace="TypeLite.Net4" #>
+<#@output extension=".d.ts"#>
+
+ <#@include file="Manager.ttinclude"#>
+<# var manager = Manager.Create(Host, GenerationEnvironment); #>
+
+<# var ts = TypeScript.Definitions()
+        .For<bbom.Admin.Core.ViewModels.Common.TableModel>();#>
+
+<#= ts.Generate(TsGeneratorOutput.Properties) #>

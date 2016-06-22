@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="identityDbEntities-Web.config Connection String" description="identityDbEntities Строка подключения в web.config, используемая приложением для доступа к базе данных." defaultValue="metadata=res://*/IdentityModel.IdentityModel.csdl|res://*/IdentityModel.IdentityModel.ssdl|res://*/IdentityModel.IdentityModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=193.124.67.40;initial catalog=identityDb;user id=su;password=306418;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\My\ documents\\Visual\ Studio\ 2015\\Projects\\bbom\\Admin\\elcoin\.Admin\\obj\\testRealese\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='identityDbEntities']/@connectionString" />
+  </parameter>
+  <parameter name="contentDbEntities-Web.config Connection String" description="contentDbEntities Строка подключения в web.config, используемая приложением для доступа к базе данных." defaultValue="metadata=res://*/ContentModel.ContentModel.csdl|res://*/ContentModel.ContentModel.ssdl|res://*/ContentModel.ContentModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=193.124.67.40;initial catalog=coinContentDb;user id=su;password=306418;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\My\ documents\\Visual\ Studio\ 2015\\Projects\\bbom\\Admin\\elcoin\.Admin\\obj\\testRealese\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='contentDbEntities']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Строка подключения в web.config, используемая приложением для доступа к базе данных." defaultValue="Data Source=193.124.67.40;Initial Catalog=identityDb;User ID=su;Password=306418" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\My\ documents\\Visual\ Studio\ 2015\\Projects\\bbom\\Admin\\elcoin\.Admin\\obj\\testRealese\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

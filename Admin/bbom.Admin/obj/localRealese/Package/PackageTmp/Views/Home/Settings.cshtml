@@ -1,0 +1,256 @@
+﻿@using System.Web.Mvc.Html
+@using Microsoft.AspNet.Identity
+@model bbom.Admin.Core.ViewModels.Templates.TemplateSettings
+@{
+  Layout = "../Shared/_Layout.cshtml";
+}
+@*<h1>Настройки сайта</h1>
+<div class="panel panel-default" style="margin-top: 20px">
+    <div class=" panel-heading">Стандартные шаблоны</div>
+    <div class="panel-body">
+        <div>
+            <table id="tableDefault" class="display">
+                <thead>
+                    <tr>
+                        <th style=" border-top: 0px solid #ddd;">ID</th>
+                        <th style=" border-top: 0px solid #ddd;">Название</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" style="margin-top: 20px">
+    <div class=" panel-heading">Персональные шаблоны</div>
+    <div class="panel-body">
+        <div>
+            <table id="tableCreated" class="display">
+                <thead>
+                <tr>
+                    <th style=" border-top: 0px solid #ddd;">ID</th>
+                    <th style=" border-top: 0px solid #ddd;">Название</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Ссылка на Ваше видео.</div>
+            <div class="panel-body">
+                <div>
+                    <h3><input id="userVideoLink" value="@Model.userVideoLink" type="text" style="width: 100%"></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<h1>Настройки аккаунта</h1>
+<div class="panel panel-default" style="margin-top: 20px">
+    <div class="panel panel-heading">Ваши контактные данные</div>
+    <div class="panel-body">
+        <label>Изображение</label>
+        <img id="userImage" style="display: none; height: 200px" src='@(Url.Action( "GetProfileUserImage", "Manage") + "?userId=" + User.Identity.GetUserId())'/>
+        @using (Ajax.BeginForm("SaveSettings", "Manage", null, new AjaxOptions
+        {
+            Url = Url.Action("SaveSettings", "Manage"),
+            OnSuccess = "onNotify",
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace,
+            AllowCache = true
+        }, new {enctype = "multipart/form-data"}))
+        {
+            @Html.AntiForgeryToken()
+            <label>Электронная почта: </label>
+            @Model.Email
+            <br/>
+            //
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+            //
+            @Html.LabelFor(m => m.Suname)
+            @Html.TextBoxFor(m => m.Suname, new {@class = "form-control"})
+            //
+            @Html.LabelFor(m => m.Altname)
+            @Html.TextBoxFor(m => m.Altname, new {@class = "form-control"})
+            //
+            @Html.LabelFor(m => m.PhoneNumber)
+            @Html.TextBoxFor(m => m.PhoneNumber, new {@class = "form-control"})
+            <br/>
+            <button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
+        }
+        <br/>
+        <span class="btn btn-primary fileinput-button">
+            <span>Загрузить изображение</span>
+            <input id="fileupload" type="file" name="files[]" multiple>
+        </span>
+        <br>
+        <br>
+        <!-- The global progress bar -->
+        <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
+        </div>
+        <!-- The container for the uploaded files -->
+        <div id="files" class="files"></div>
+    </div>
+</div>
+<div class="panel panel-default" style="margin-top: 20px">
+    <div class="panel panel-heading">Дополнительные настройки</div>
+    <div class="panel-body">
+        <table id="exRegTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th style="border-top: 0px solid #ddd;">
+                    id
+                </th>
+                <th style="border-top: 0px solid #ddd;">
+                    Доп. настройка
+                </th>
+                <th style="border-top: 0px solid #ddd;">
+                    Значение
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div class="panel panel-default" style="margin-top: 20px">
+    <div class="panel panel-heading">Средства связи</div>
+    <div class="panel-body">
+        <table id="communicationsTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th style="border-top: 0px solid #ddd;">
+                    id
+                </th>
+                <th style="border-top: 0px solid #ddd;">
+                    Средство связи
+                </th>
+                <th style="border-top: 0px solid #ddd;">
+                    Значение
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div class="panel panel-default" style="margin-top: 20px">
+    <div class="panel panel-heading">Безопасность</div>
+    <div class="panel-body">
+        <div>
+            <a href="@Url.Action("ChangePassword", "Manage")">Сменить пароль</a>
+        </div>
+    </div>
+</div>
+
+        <!-- modalAddCommunication -->
+        <div class="modal fade" id="modalAddCommunication" tabindex="-1" role="dialog" aria-labelledby="modalAddCommunicationLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width: 900px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="modalAddCommunicationLabel">Добавить средство связи</h4>
+                    </div>
+                    <div class="modal-body" style="padding-left: 20px">
+                        <form>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.CommunicationId, new { style = "display: block" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(m => m.CommunicationId, (IEnumerable<SelectListItem>)ViewBag.Communications)
+                                </div>
+                            </div><br />
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Value, new { style = "display: block" })
+                                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control", id = "model_value_com" } })
+                                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                            </div>
+                            <input id="modal_button_submit" type="button" value="Добавить" class="btn btn-default" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modalAddExRegParam -->
+<div class="modal fade" id="modalAddExRegParam" tabindex="-1" role="dialog" aria-labelledby="modalAddExRegParamLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modalAddExRegParamLabel">Добавить доплнительный параметр</h4>
+            </div>
+            <div class="modal-body" style="padding-left: 20px">
+                <form>
+                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ExRegParamId, new {style = "display: block"})
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.ExRegParamId, (IEnumerable<SelectListItem>) ViewBag.ExRegParams)
+                        </div>
+                    </div><br/>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ExRegParamValue, new {style = "display: block"})
+                        @Html.EditorFor(model => model.ExRegParamValue, new {htmlAttributes = new {@class = "form-control", id = "model_value_exreg"}})
+                        @Html.ValidationMessageFor(model => model.ExRegParamValue, "", new {@class = "text-danger"})
+                    </div>
+                    <input id="modal_button_submit_exregparam" type="button" value="Добавить" class="btn btn-default"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="../../Scripts/Views/Home/SettingsView.js"></script>
+    <script>
+        var GetExRegParamsArray = '@Url.Action("GetExRegParamsArray", "ExRegParams")';
+        var AddExRegParam = '@Url.Action("Add", "ExRegParams")';
+        var EditExRegParam = '@Url.Action("Edit", "ExRegParams")';;
+        var GetUserNotAddedExRegParams = '@Url.Action("GetUserNotAddedExRegParams", "ExRegParams")';
+        var GetAllExRegParams = '@Url.Action("GetAllExRegParams", "ExRegParams")';
+
+        var GetCommunicationsArray = '@Url.Action("GetCommunicationsArray", "Communication")';
+        var AddCommunication = '@Url.Action("Add", "Communication")';
+        var EditCommunication = '@Url.Action("Edit", "Communication")';
+        var GetUserNotAddedCommunications = '@Url.Action("GetUserNotAddedCommunications", "Communication")';
+        var GetAllCommunications = '@Url.Action("GetAllCommunications", "Communication")';
+        var DeleteCommunications = '@Url.Action("Delete", "Communication")';
+
+        var selectedTemplateId = '@Model.templateId';
+
+        $(function() {
+            var settingsView = new SettingsView();
+            $('#fileupload').fileupload({
+                dataType: 'json',
+                url: '@Url.Action("UserImageUpload", "Manage")',
+                autoUpload: true,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: 2000000
+            }).bind('fileuploadprogressall', function(e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('.progress .progress-bar').css('width', progress + '%');
+            }).bind('fileuploadprocessdone', function(e, data) {
+
+            }).bind('fileuploadcompleted', function(e, data) {
+
+            }).bind('fileuploaddone', function(e, data) {
+                window.notify(data.result);
+                $("#userImage").css("display", "inherit");
+            });
+        });
+
+        $(document).ready(function() {
+            $("#userImage").css("display", "inherit");
+        });
+
+        function onNotify(json) {
+            window.notify(json);
+        }
+
+    </script>
+}

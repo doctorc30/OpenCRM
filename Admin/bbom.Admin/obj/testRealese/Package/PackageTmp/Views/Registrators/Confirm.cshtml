@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Confirm";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div style="margin-top: 200px">
+    <h2>Вы успешно зарегистрировались!</h2>
+    <h3>Перейти <a id="userLink" href="@("http://"+Request.Url.Authority)">@("http://" + Request.Url.Authority)</a></h3>
+</div>
+

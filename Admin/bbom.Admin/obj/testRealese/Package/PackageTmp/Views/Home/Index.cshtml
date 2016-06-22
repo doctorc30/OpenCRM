@@ -1,0 +1,36 @@
+﻿@model bbom.Data.ContentModel.Template
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = null;
+    ViewBag.RegisterLink = Url.Action("Register", "Account");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Html.Raw(Model.Links)
+</head>
+<body>
+@Html.Raw(Model.Header)
+@Html.Raw(Model.Body)
+@*@{
+    Html.RenderPartial("IndexComingSoon");
+}*@
+@Html.Raw(Model.Footer)
+<script>
+    $(function () {
+        $("#userRegistrLink").attr("href", '@ViewBag.RegisterLink');
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetUserVideoLink", "Templates")",
+            success: function (link) {
+                $("#userVideoLink").attr("href", link);
+            }
+    });
+    })
+</script>
+</body>
+</html>

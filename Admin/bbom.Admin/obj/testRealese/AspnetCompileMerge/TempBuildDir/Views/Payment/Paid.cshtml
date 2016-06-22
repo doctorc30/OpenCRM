@@ -1,0 +1,25 @@
+﻿@section Scripts
+{
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                type: "POST",
+                data: {
+                    notification_type: "1",
+                    operation_id: "2",
+                    amount: "3",
+                    withdraw_amount: "4",
+                    currency: "5",
+                    datetime: "6",
+                    sender: "7",
+                    codepro: "8",
+                    label: "9",
+                    sha1_hash: "10",
+                    test_notification: "11",
+                    unaccepted: "12"
+                },
+                url: '@Url.Action("Paid", "Payment")'
+            });
+        });
+    </script>
+}

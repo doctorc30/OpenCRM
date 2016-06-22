@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Confirm";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div style="margin-top: 200px">
+    <h2>Вы успешно создали сайт!</h2>
+    <h3>
+        Ссылка на него <a id="userLink"></a>
+    </h3>
+</div>
+
+@section Scripts
+{
+    <script>
+        $("#userLink").attr('href', window.GetUrl('@ViewBag.UserName', ''));
+        $("#redirectUrl").attr('href', window.GetUrl('@ViewBag.UserName', ''));
+        $("#userLink").text(window.GetUrl('@ViewBag.UserName', ''));
+    </script>
+}
+

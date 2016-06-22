@@ -1,0 +1,33 @@
+﻿@using bbom.Data.ModelPartials.Constants
+@{
+    ViewBag.Title = "Инструкция";
+}
+
+<h1>@ViewBag.Title</h1>
+<div id="posts">
+    
+</div>
+@section Scripts {
+    <script id="postTmpl" type="text/x-jquery-tmpl">
+        <div class="panel panel-default" style="margin-top: 20px">
+            <div class="panel panel-heading">${title}</div>
+            <div class="panel-body">
+                <iframe width="560" height="315" src="${text}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </script>
+    <script>
+        $(document)
+            .ready(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("GetPostsByType", "Posts")" + "?typeId=@PostType.Info",
+                    success: function(json) {
+                        for (var i = 0; i < json.length; i++) {
+                            $('#postTmpl').tmpl(json[i]).appendTo('#posts');
+                        }
+                    }
+                });
+            });
+    </script>
+}

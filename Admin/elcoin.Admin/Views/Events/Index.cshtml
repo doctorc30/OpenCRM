@@ -1,0 +1,265 @@
+﻿@using bbom.Admin.Core.Extensions
+@using bbom.Admin.Core.Notifications
+@using bbom.Data.ModelPartials.Constants
+@model bbom.Data.ContentModel.Event
+<div class="panel panel-default row" style="margin: 20px">
+    <div class="panel-heading">
+        @Model.Title @(Model.Stats == EventStatus.Run ? " Прямой эфир" : "")
+        <button id="startEvent" type="button" class="btn btn-primary" style="visibility: hidden;">Начать</button>
+        <button id="stopEvent" type="button" class="btn btn-primary" style="visibility: hidden;">Закончить</button>
+        <button id="upRoles" type="button" class="btn btn-primary" style="visibility: hidden;">Принять просмотр</button>
+        <svg style="float: right;width: 20px;height: 20px;align-content: center;text-align: center;position: relative;top: 2px;">
+            <circle id="recStatus" cx="10" cy="10" r="10" fill="white"></circle>
+        </svg>
+    </div>
+    <div id="player" class="col-md-6"></div>
+    <div class="col-md-6" style="overflow: auto">
+        <strong>Сейчас смотрят:</strong>
+        <div id="watches"></div>
+    </div>
+</div>
+<div class="row" style="margin: 20px">
+    <div id="chat" class="panel panel-default chat">
+        <div class="panel-heading" id="accordion">
+            <svg class="glyph stroked two-messages"><use xlink:href="#stroked-two-messages"></use></svg> Чат
+            <small class="text-muted">Смотрит: </small><small id="iterator" class="text-muted"></small>
+            <button id="chatOn" onclick="chatOn()" type="button" class="btn btn-primary" style="visibility: hidden; float: right;">Включить</button>
+            <button id="chatOff" onclick="chatOff()" type="button" class="btn btn-primary" style="visibility: hidden; float: right;">Выключить</button>
+        </div>
+        <div class="panel-body">
+            <ul id="chatBody"></ul>
+        </div>
+        <div id="messagePlace" class="panel-footer" style="visibility: hidden">
+            <div class="input-group">
+                <input id="btn-input" type="text" class="form-control input-md" placeholder="Type your message here..." onkeydown="noLatter(event)" />
+                <span class="input-group-btn">
+                    <button id="sendButton" class="button button--sacnite button--round-l"><svg class="glyph stroked arrow right"><use xlink:href="#stroked-arrow-right" /></svg></button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div><!--/.col-->
+
+@section Scripts
+{
+    <script id="messageFromTmpl" type="text/x-jquery-tmpl">
+        <li class="left clearfix">
+            <span class="chat-img pull-left">
+                <img src="${image}" alt="User Avatar" class="img-circle" style="width: 80px; height: 80px; float: left;" />
+            </span>
+            <div class="chat-body clearfix">
+                <div class="header">
+                    <strong class="pull-left primary-font">${name}</strong>
+                </div>
+                <br />
+                <p>${message}</p>
+            </div>
+        </li>
+    </script>
+    <script id="messageToTmpl" type="text/x-jquery-tmpl">
+        <li class="right clearfix">
+            <span class="chat-img pull-right">
+                <img src="${image}" alt="User Avatar" class="img-circle" style="width: 80px;height: 80px;" />
+            </span>
+            <div class="chat-body clearfix">
+                <div class="header" style="float: right;">
+                    <strong class="pull-left primary-font">${name}</strong>
+                </div>
+                <br />
+                <p style="float: right;">${message}</p>
+            </div>
+        </li>
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            var adress = ymaps.geolocation.city + ', ' + ymaps.geolocation.region + ", " + ymaps.geolocation.country;
+            $.connection.hub.start().done(function() {
+                $.connection.Chat.server.setUserAdress(adress);
+            });
+        }
+    </script>
+    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+    <script src="~/Scripts/Views/Home/CalendarView.js"></script>
+    <script>
+        var startEvents = "@Url.Action("Start", "Events")";
+        var stopEvents = "@Url.Action("Stop", "Events")";
+        var upRolesEvents = "@Url.Action("UpRoles", "Events")";
+        var getEventJsonEvents = "@Url.Action("GetEventJson", "Events")";
+        var userItNotWatched;
+
+        $(document).ready(function() {
+            var messagePlace = $("#messagePlace");
+            var wathces = $('#watches');
+
+            var eventButtons = new EventButtons();
+            eventButtons.modalButtonStart = $("#startEvent");
+            eventButtons.modalButtonUpRoles = $("#upRoles");
+            eventButtons.modalButtonStop = $("#stopEvent");
+            eventButtons.modalEventStatus = $("#recStatus");
+            eventButtons.initByEventId(@Model.Id, function() {
+                eventButtons.visible(userIsRole('@UserRole.Spiker'));
+            });
+
+            if (userIsRole('@UserRole.Spiker')) {
+                $('#chatOn').css("visibility", "visible");
+                $('#chatOff').css("visibility", "visible");
+
+            }
+
+            $.connection.Chat.client.addMessage = function(fio, image, message) {
+                // Добавление сообщений на веб-страницу
+                var rec = {};
+                rec.name = fio;
+                rec.message = message;
+                rec.image = image;
+                $('#messageFromTmpl').tmpl(rec).appendTo('#chatBody');
+            };
+
+            $.connection.Chat.client.addUser = function(name, fio) {
+                wathces.append('<p style="margin: 0;" id="user' + name + '">' + fio + '</p>');
+            };
+
+            $.connection.Chat.client.updateAllUsers = function(users) {
+                for (var i = 0; i < users.length; i++) {
+                    var text = users[i].FIO;
+                    if (users[i].Adress != null) {
+                        text += " " + ' (' + users[i].Adress + ')';
+                    }
+                    wathces.append('<p style="margin: 0;" id="user' + users[i].Name + '">' + text + '</p>');
+                }
+            };
+
+            $.connection.Chat.client.removeUser = function(name) {
+                $("#user" + name).remove();
+            };
+
+            $.connection.Chat.client.updateIterator = function(count) {
+                $('#iterator').text(count);
+            };
+
+            $.connection.Chat.client.updateUserAdress = function(name, adress) {
+                var userDOM = $("#user" + name);
+                userDOM.text(userDOM.text() + " (" + adress + ")");
+            };
+
+            $.connection.Chat.client.chatOn = function() {
+                messagePlace.css("visibility", "visible");
+            };
+
+            $.connection.Chat.client.chatOff = function() {
+                messagePlace.css("visibility", "hidden");
+            };
+
+            $.connection.Chat.client.updateChat = function(status) {
+                if (status) {
+                    messagePlace.css("visibility", "visible");
+                } else {
+                    messagePlace.css("visibility", "hidden");
+                }
+            };
+
+            $.connection.hub.start().done(function() {
+                $.connection.Chat.server.connect("@User.GetUserIO()", "@User.GetUserName()", @Model.Id);
+            });
+
+            $('#sendButton').click(function() {
+                var fio = '@User.GetUserIO()';
+                var id = '@User.GetUserId()';
+                var message = $('#btn-input').val();
+                $.connection.Chat.server.send(fio, id, message, @Model.Id);
+                var sender = {};
+                sender.name = fio;
+                sender.message = message;
+                sender.image = '@(Url.Action("GetProfileUserImage", "Manage") + "?userId=" + User.GetUserId())';
+                $('#messageToTmpl').tmpl(sender).appendTo('#chatBody');
+                $('#btn-input').val('');
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetUserInfoJson", "Users")",
+                data: {
+                    userName: "@User.GetUserName()"
+                },
+                success: function(user) {
+                    if (user.itNotWatched === "True") {
+                        userItNotWatched = true;
+                    } else {
+                        userItNotWatched = false;
+                    }
+                }
+            });
+        });
+
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var videoDuration;
+        var done = false;
+        var timesWatch = 1;
+
+        function onPlayerReady(event) {
+            videoDuration = player.getDuration();
+            $("#player").contents().find("a.ytp-watermark").empty();
+        }
+
+        function chatOn() {
+            $.connection.Chat.server.chatStatus(@Model.Id, true);
+        }
+
+        function chatOff() {
+            $.connection.Chat.server.chatStatus(@Model.Id, false);
+        }
+
+        function onYouTubeIframeAPIReady() {
+            var videoId = '@Model.Url'.replace("https://www.youtube.com/watch?v=", "");
+            videoId = videoId.replace("https://www.youtube.com/embed/", "");
+            player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: videoId,
+                playerVars: {
+                    modestbranding: 1,
+                    autoplay: 1,
+                    fs: 1,
+                    iv_load_policy: 3,
+                    rel: 0,
+                    showinfo: 0,
+                    controls: 1
+                },
+                events: {
+                    onReady: onPlayerReady,
+                    onStateChange: onPlayerStateChange
+                }
+            });
+        }
+
+        function setWatchRole() {
+            $.ajax({
+                type: "POST",
+                data: {
+                    userName: "@User.GetUserName()"
+                },
+                url: "@Url.Action("SetWatchRole", "Users")",
+                success: function(json) {
+                    window.notify(json);
+                },
+                error: function() {
+                    window.notify({ type: '@AlertStyles.Danger' });
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            var curentTime = event.target.getCurrentTime();
+            if (event.data === YT.PlayerState.ENDED && curentTime >= videoDuration - 3 && userItNotWatched) {
+                setWatchRole();
+            }
+        }
+    </script>
+}

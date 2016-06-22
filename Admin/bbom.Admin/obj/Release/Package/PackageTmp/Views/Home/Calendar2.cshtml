@@ -1,0 +1,118 @@
+﻿@model bbom.Data.Model.Event
+<div class="panel panel-default" style="margin-top: 20px">
+    <div class=" panel-heading">Ваш каледарь</div>
+    <div class="panel-body">
+        <div>
+            <button id="addEventButton" type="button" class="btn btn-primary">Добавить событие</button>
+            <div id='calendar' style="margin-top: 20px"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ModalAddEvent -->
+<div class="modal fade" id="modalAddEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabelAddEvent" aria-hidden="true">
+    <div class="modal-dialog" style="width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabelAddEvent">Новое событие</h4>
+                <button id="startEvent" type="button" class="btn btn-primary" style="visibility: hidden;">Начать</button>
+                <button id="stopEvent" type="button" class="btn btn-primary" style="visibility: hidden;">Закончить</button>
+                <button id="upRoles" type="button" class="btn btn-primary" style="visibility: hidden;">Принять просмотр</button>
+                <svg style="float: right;width: 20px;height: 20px;align-content: center;text-align: center;position: relative;top: 2px;">
+                    <circle id="recStatus" cx="10" cy="10" r="10" fill="white"></circle>
+                </svg>
+            </div>
+            <div class="modal-body" style="padding-left: 20px">
+                <form role="form">
+                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                    <div id="userPanel" class="form-group" style="visibility: collapse">
+                        @Html.LabelFor(model => model.AspNetUser, htmlAttributes: new {@class = "control-label col-md-2", id = "labelUserCreated"})
+                        <label id="model_user" style="display: block"></label>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "form-control", id = "model_title"}})
+                        @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", id = "model_des" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Spiker, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.EditorFor(model => model.Spiker, new {htmlAttributes = new {@class = "form-control", id = "model_spiker"}})
+                        @Html.ValidationMessageFor(model => model.Spiker, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Icon, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Icon, new { htmlAttributes = new { @class = "form-control", id = "model_icon" } })
+                        @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SpikerId, new {@class = "col-md-2 control-label"})
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.SpikerId, (IEnumerable<SelectListItem>) ViewBag.Spikers)
+                        </div>
+                    </div><br/>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.TypeId, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.TypeId, (IEnumerable<SelectListItem>)ViewBag.EventTypes)
+                        </div>
+                    </div><br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Url, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.EditorFor(model => model.Url, new {htmlAttributes = new {@class = "form-control", id = "model_url"}})
+                        @Html.ValidationMessageFor(model => model.Url, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StartDate, htmlAttributes: new
+                        {
+                            @class = "control-label col-md-2", id = "label_start"
+
+                        })
+                        @Html.EditorFor(model => model.StartDate, new {htmlAttributes = new {@class = "form-control", id = "model_start"}})
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EndDate, htmlAttributes: new {@class = "control-label col-md-2", id = "label_end"})
+                        @Html.EditorFor(model => model.EndDate, new {htmlAttributes = new {@class = "form-control", id = "model_end"}})
+                        @Html.ValidationMessageFor(model => model.EndDate, "", new {@class = "text-danger"})
+                    </div>
+                </form>
+                <div class="form-group">
+                    <input id="modal_button_submit" type="button" value="Добавить" class="btn btn-default"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/Scripts/Views/Home/CalendarView.js"></script>
+    <script>
+        var editEvents = '@Url.Action("Edit", "Events")';
+        var getEventJsonEvents = "@Url.Action("GetEventJson", "Events")";
+        var getAllJsonEvents = "@Url.Action("GetAllJson", "Events")";
+        var addEvents = "@Url.Action("Add", "Events")";
+        var indexEvents = "@Url.Action("Index", "Events")";
+        var startEvents = "@Url.Action("Start", "Events")";
+        var stopEvents = "@Url.Action("Stop", "Events")";
+        var upRolesEvents = "@Url.Action("UpRoles", "Events")";
+
+        $(document).ready(function() {
+            var calendar = new CalendarView(function() {
+                $.connection.event.server.updateCalendar();
+            });
+            $.connection.hub.start();
+            $.connection.event.client.updateCalendarSR = function() {
+                calendar.updateCalendar();
+            };
+            $("#calendar").on("contextmenu", false);
+            $("#addEventButton").on("click", function() {
+                calendar.addEvent();
+            });
+        });
+    </script>
+}

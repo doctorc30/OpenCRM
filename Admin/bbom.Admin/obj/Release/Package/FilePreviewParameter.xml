@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="site" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\My\ documents\\Visual\ Studio\ 2015\\Projects\\bbom\\Admin\\bbom\.Admin\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\My\ documents\\Visual\ Studio\ 2015\\Projects\\bbom\\Admin\\bbom\.Admin\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="bbomDbEntities-Web.config Connection String" description="" value="metadata=res://*/Model.Model.csdl|res://*/Model.Model.ssdl|res://*/Model.Model.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=193.124.67.40;initial catalog=bbomDb2;user id=cos2;password=123qwe;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\My\ documents\\Visual\ Studio\ 2015\\Projects\\bbom\\Admin\\bbom\.Admin\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='bbomDbEntities']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=193.124.67.40;Initial Catalog=bbomDb2;User ID=cos2;Password=123qwe" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\My\ documents\\Visual\ Studio\ 2015\\Projects\\bbom\\Admin\\bbom\.Admin\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

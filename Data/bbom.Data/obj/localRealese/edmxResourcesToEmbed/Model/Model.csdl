@@ -1,0 +1,809 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bbomDb2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DiscountTypes" Relationship="Self.AccessToDiscountType" FromRole="AspNetRoles" ToRole="DiscountType" />
+    <NavigationProperty Name="EventTypes" Relationship="Self.AccessToEventTypes" FromRole="AspNetRoles" ToRole="EventTypes" />
+    <NavigationProperty Name="Menus" Relationship="Self.AccessToMenu" FromRole="AspNetRoles" ToRole="Menus" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="parent_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Foot" Type="Int32" />
+    <Property Name="InvitedUser" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateRegistration" Type="DateTime" Precision="3" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Suname" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Altname" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ActiveTemplateId" Type="Int32" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_AspNetUsers_AspNetUsers" FromRole="AspNetUsers" ToRole="AspNetUsers1" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_AspNetUsers_AspNetUsers" FromRole="AspNetUsers1" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers11" Relationship="Self.FK_AspNetUsers_AspNetUsers1" FromRole="AspNetUsers" ToRole="AspNetUsers1" />
+    <NavigationProperty Name="AspNetUser2" Relationship="Self.FK_AspNetUsers_AspNetUsers1" FromRole="AspNetUsers1" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Template" Relationship="Self.FK_AspNetUsers_Tempalates" FromRole="AspNetUsers" ToRole="Templates" />
+    <NavigationProperty Name="Events" Relationship="Self.FK_Events_AspNetUsers" FromRole="AspNetUsers" ToRole="Events" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK_Payments_AspNetUsers" FromRole="AspNetUsers" ToRole="Payments" />
+    <NavigationProperty Name="UserCommunications" Relationship="Self.FK_UserCommunications_AspNetUsers" FromRole="AspNetUsers" ToRole="UserCommunications" />
+    <NavigationProperty Name="UserExtraRegParams" Relationship="Self.FK_UserExtraRegParams_AspNetUsers" FromRole="AspNetUsers" ToRole="UserExtraRegParams" />
+    <NavigationProperty Name="UsersTemplateSettings" Relationship="Self.FK_UsersTemplateSettings_AspNetUsers" FromRole="AspNetUsers" ToRole="UsersTemplateSettings" />
+    <NavigationProperty Name="UsersTrees" Relationship="Self.FK_UsersTree_AspNetUsers" FromRole="AspNetUsers" ToRole="UsersTree" />
+    <NavigationProperty Name="UsersTrees1" Relationship="Self.FK_UsersTree_AspNetUsers1" FromRole="AspNetUsers" ToRole="UsersTree" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+    <NavigationProperty Name="ExtraRegParams" Relationship="Self.ReceivedExtraRegParams" FromRole="AspNetUsers" ToRole="ExtraRegParams" />
+    <NavigationProperty Name="TaskToDoes" Relationship="Self.UserComplitedTasks" FromRole="AspNetUsers" ToRole="TaskToDo" />
+    <NavigationProperty Name="Discounts" Relationship="Self.UserDiscounts" FromRole="AspNetUsers" ToRole="Discounts" />
+  </EntityType>
+  <EntityType Name="Communicatio">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UserCommunications" Relationship="Self.FK_UserCommunications_Communicatios" FromRole="Communicatios" ToRole="UserCommunications" />
+  </EntityType>
+  <EntityType Name="DefaultSettingsValue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="SettingId" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Setting" Relationship="Self.FK_DefaultSettingsValues_Settings" FromRole="DefaultSettingsValues" ToRole="Settings" />
+  </EntityType>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DiscountTypeId" Type="Int32" Nullable="false" />
+    <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="DiscountLimitationId" Type="Int32" />
+    <Property Name="LimitationTimes" Type="Int32" />
+    <Property Name="MaximumDiscountedQuantity" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DiscountType" Relationship="Self.FK_Discounts_DiscountType1" FromRole="Discounts" ToRole="DiscountType" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK_Payments_Discounts" FromRole="Discounts" ToRole="Payments" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.UserDiscounts" FromRole="Discounts" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="DiscountType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="Discounts" Relationship="Self.FK_Discounts_DiscountType1" FromRole="DiscountType" ToRole="Discounts" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AccessToDiscountType" FromRole="DiscountType" ToRole="AspNetRoles" />
+    <NavigationProperty Name="PaymentPlans" Relationship="Self.DiscountTypePaymentsPlans" FromRole="DiscountType" ToRole="PaymentPlans" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TypeId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Spiker" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Icon" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Events_AspNetUsers" FromRole="Events" ToRole="AspNetUsers" />
+    <NavigationProperty Name="EventType" Relationship="Self.FK_Events_EventTypes" FromRole="Events" ToRole="EventTypes" />
+  </EntityType>
+  <EntityType Name="EventType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Events" Relationship="Self.FK_Events_EventTypes" FromRole="EventTypes" ToRole="Events" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AccessToEventTypes" FromRole="EventTypes" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="ExtraRegParam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UserExtraRegParams" Relationship="Self.FK_UserExtraRegParams_ExtraRegParams" FromRole="ExtraRegParams" ToRole="UserExtraRegParams" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.ReceivedExtraRegParams" FromRole="ExtraRegParams" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Discription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Enable" Type="Int32" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="OrderNum" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Menus1" Relationship="Self.FK_Menus_Menus" FromRole="Menus" ToRole="Menus1" />
+    <NavigationProperty Name="Menu1" Relationship="Self.FK_Menus_Menus" FromRole="Menus1" ToRole="Menus" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AccessToMenu" FromRole="Menus" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="PaymentPlan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WorkAmount" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK_Payments_PaymentPlans" FromRole="PaymentPlans" ToRole="Payments" />
+    <NavigationProperty Name="DiscountTypes" Relationship="Self.DiscountTypePaymentsPlans" FromRole="PaymentPlans" ToRole="DiscountType" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="PaymentPlanId" Type="Int32" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="DiscountId" Type="Int32" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Payments_AspNetUsers" FromRole="Payments" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Discount" Relationship="Self.FK_Payments_Discounts" FromRole="Payments" ToRole="Discounts" />
+    <NavigationProperty Name="PaymentPlan" Relationship="Self.FK_Payments_PaymentPlans" FromRole="Payments" ToRole="PaymentPlans" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DefaultSettingsValues" Relationship="Self.FK_DefaultSettingsValues_Settings" FromRole="Settings" ToRole="DefaultSettingsValues" />
+    <NavigationProperty Name="UsersTemplateSettings" Relationship="Self.FK_UsersTemplateSettings_Settings" FromRole="Settings" ToRole="UsersTemplateSettings" />
+    <NavigationProperty Name="Templates" Relationship="Self.TemplateSettings" FromRole="Settings" ToRole="Templates" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TaskToDo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.UserComplitedTasks" FromRole="TaskToDo" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Template">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Header" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Footer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDefault" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Links" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_Tempalates" FromRole="Templates" ToRole="AspNetUsers" />
+    <NavigationProperty Name="UsersTemplateSettings" Relationship="Self.FK_UsersTemplateSettings_Templates" FromRole="Templates" ToRole="UsersTemplateSettings" />
+    <NavigationProperty Name="Settings" Relationship="Self.TemplateSettings" FromRole="Templates" ToRole="Settings" />
+  </EntityType>
+  <EntityType Name="UserCommunication">
+    <Key>
+      <PropertyRef Name="CommunicationId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="CommunicationId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserCommunications_AspNetUsers" FromRole="UserCommunications" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Communicatio" Relationship="Self.FK_UserCommunications_Communicatios" FromRole="UserCommunications" ToRole="Communicatios" />
+  </EntityType>
+  <EntityType Name="UserExtraRegParam">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ExtraRegParamId" />
+    </Key>
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ExtraRegParamId" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserExtraRegParams_AspNetUsers" FromRole="UserExtraRegParams" ToRole="AspNetUsers" />
+    <NavigationProperty Name="ExtraRegParam" Relationship="Self.FK_UserExtraRegParams_ExtraRegParams" FromRole="UserExtraRegParams" ToRole="ExtraRegParams" />
+  </EntityType>
+  <EntityType Name="UsersTemplateSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TemplateId" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SettingId" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UsersTemplateSettings_AspNetUsers" FromRole="UsersTemplateSettings" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Setting" Relationship="Self.FK_UsersTemplateSettings_Settings" FromRole="UsersTemplateSettings" ToRole="Settings" />
+    <NavigationProperty Name="Template" Relationship="Self.FK_UsersTemplateSettings_Templates" FromRole="UsersTemplateSettings" ToRole="Templates" />
+  </EntityType>
+  <EntityType Name="UsersTree">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="InvitedUserId" />
+    </Key>
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="InvitedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Foot" Type="Int32" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UsersTree_AspNetUsers" FromRole="UsersTree" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_UsersTree_AspNetUsers1" FromRole="UsersTree" ToRole="AspNetUsers" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="AspNetUsers1" Type="Self.AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers1">
+        <PropertyRef Name="parent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="AspNetUsers1" Type="Self.AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers1">
+        <PropertyRef Name="InvitedUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_Tempalates">
+    <End Role="Templates" Type="Self.Template" Multiplicity="0..1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Templates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="ActiveTemplateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Events_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Events" Type="Self.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payments_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserCommunications_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="UserCommunications" Type="Self.UserCommunication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserCommunications">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserExtraRegParams_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="UserExtraRegParams" Type="Self.UserExtraRegParam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserExtraRegParams">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersTemplateSettings_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="UsersTemplateSettings" Type="Self.UsersTemplateSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsersTemplateSettings">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersTree_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="UsersTree" Type="Self.UsersTree" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsersTree">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersTree_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="UsersTree" Type="Self.UsersTree" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsersTree">
+        <PropertyRef Name="InvitedUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserCommunications_Communicatios">
+    <End Role="Communicatios" Type="Self.Communicatio" Multiplicity="1" />
+    <End Role="UserCommunications" Type="Self.UserCommunication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Communicatios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserCommunications">
+        <PropertyRef Name="CommunicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DefaultSettingsValues_Settings">
+    <End Role="Settings" Type="Self.Setting" Multiplicity="1" />
+    <End Role="DefaultSettingsValues" Type="Self.DefaultSettingsValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Settings">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DefaultSettingsValues">
+        <PropertyRef Name="SettingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Discounts_DiscountType1">
+    <End Role="DiscountType" Type="Self.DiscountType" Multiplicity="1" />
+    <End Role="Discounts" Type="Self.Discount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiscountType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Discounts">
+        <PropertyRef Name="DiscountTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payments_Discounts">
+    <End Role="Discounts" Type="Self.Discount" Multiplicity="0..1" />
+    <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discounts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="DiscountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Events_EventTypes">
+    <End Role="EventTypes" Type="Self.EventType" Multiplicity="1" />
+    <End Role="Events" Type="Self.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserExtraRegParams_ExtraRegParams">
+    <End Role="ExtraRegParams" Type="Self.ExtraRegParam" Multiplicity="1" />
+    <End Role="UserExtraRegParams" Type="Self.UserExtraRegParam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExtraRegParams">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserExtraRegParams">
+        <PropertyRef Name="ExtraRegParamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menus_Menus">
+    <End Role="Menus" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="Menus1" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Menus1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payments_PaymentPlans">
+    <End Role="PaymentPlans" Type="Self.PaymentPlan" Multiplicity="0..1" />
+    <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentPlans">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="PaymentPlanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersTemplateSettings_Settings">
+    <End Role="Settings" Type="Self.Setting" Multiplicity="1" />
+    <End Role="UsersTemplateSettings" Type="Self.UsersTemplateSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Settings">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsersTemplateSettings">
+        <PropertyRef Name="SettingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersTemplateSettings_Templates">
+    <End Role="Templates" Type="Self.Template" Multiplicity="1" />
+    <End Role="UsersTemplateSettings" Type="Self.UsersTemplateSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Templates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsersTemplateSettings">
+        <PropertyRef Name="TemplateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccessToDiscountType">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="DiscountType" Type="Self.DiscountType" Multiplicity="*" />
+  </Association>
+  <Association Name="AccessToEventTypes">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="EventTypes" Type="Self.EventType" Multiplicity="*" />
+  </Association>
+  <Association Name="AccessToMenu">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="Menus" Type="Self.Menu" Multiplicity="*" />
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <Association Name="DiscountTypePaymentsPlans">
+    <End Role="DiscountType" Type="Self.DiscountType" Multiplicity="*" />
+    <End Role="PaymentPlans" Type="Self.PaymentPlan" Multiplicity="*" />
+  </Association>
+  <Association Name="ReceivedExtraRegParams">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+    <End Role="ExtraRegParams" Type="Self.ExtraRegParam" Multiplicity="*" />
+  </Association>
+  <Association Name="TemplateSettings">
+    <End Role="Settings" Type="Self.Setting" Multiplicity="*" />
+    <End Role="Templates" Type="Self.Template" Multiplicity="*" />
+  </Association>
+  <Association Name="UserComplitedTasks">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+    <End Role="TaskToDo" Type="Self.TaskToDo" Multiplicity="*" />
+  </Association>
+  <Association Name="UserDiscounts">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+    <End Role="Discounts" Type="Self.Discount" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="bbomDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="Communicatios" EntityType="Self.Communicatio" />
+    <EntitySet Name="DefaultSettingsValues" EntityType="Self.DefaultSettingsValue" />
+    <EntitySet Name="Discounts" EntityType="Self.Discount" />
+    <EntitySet Name="DiscountTypes" EntityType="Self.DiscountType" />
+    <EntitySet Name="Events" EntityType="Self.Event" />
+    <EntitySet Name="EventTypes" EntityType="Self.EventType" />
+    <EntitySet Name="ExtraRegParams" EntityType="Self.ExtraRegParam" />
+    <EntitySet Name="Menus" EntityType="Self.Menu" />
+    <EntitySet Name="PaymentPlans" EntityType="Self.PaymentPlan" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="Settings" EntityType="Self.Setting" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TaskToDoes" EntityType="Self.TaskToDo" />
+    <EntitySet Name="Templates" EntityType="Self.Template" />
+    <EntitySet Name="UserCommunications" EntityType="Self.UserCommunication" />
+    <EntitySet Name="UserExtraRegParams" EntityType="Self.UserExtraRegParam" />
+    <EntitySet Name="UsersTemplateSettings" EntityType="Self.UsersTemplateSetting" />
+    <EntitySet Name="UsersTrees" EntityType="Self.UsersTree" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_AspNetUsers" Association="Self.FK_AspNetUsers_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUsers1" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_AspNetUsers1" Association="Self.FK_AspNetUsers_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUsers1" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_Tempalates" Association="Self.FK_AspNetUsers_Tempalates">
+      <End Role="Templates" EntitySet="Templates" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Events_AspNetUsers" Association="Self.FK_Events_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payments_AspNetUsers" Association="Self.FK_Payments_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserCommunications_AspNetUsers" Association="Self.FK_UserCommunications_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserCommunications" EntitySet="UserCommunications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserExtraRegParams_AspNetUsers" Association="Self.FK_UserExtraRegParams_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserExtraRegParams" EntitySet="UserExtraRegParams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsersTemplateSettings_AspNetUsers" Association="Self.FK_UsersTemplateSettings_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UsersTemplateSettings" EntitySet="UsersTemplateSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsersTree_AspNetUsers" Association="Self.FK_UsersTree_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UsersTree" EntitySet="UsersTrees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsersTree_AspNetUsers1" Association="Self.FK_UsersTree_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UsersTree" EntitySet="UsersTrees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserCommunications_Communicatios" Association="Self.FK_UserCommunications_Communicatios">
+      <End Role="Communicatios" EntitySet="Communicatios" />
+      <End Role="UserCommunications" EntitySet="UserCommunications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DefaultSettingsValues_Settings" Association="Self.FK_DefaultSettingsValues_Settings">
+      <End Role="Settings" EntitySet="Settings" />
+      <End Role="DefaultSettingsValues" EntitySet="DefaultSettingsValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Discounts_DiscountType1" Association="Self.FK_Discounts_DiscountType1">
+      <End Role="DiscountType" EntitySet="DiscountTypes" />
+      <End Role="Discounts" EntitySet="Discounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payments_Discounts" Association="Self.FK_Payments_Discounts">
+      <End Role="Discounts" EntitySet="Discounts" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Events_EventTypes" Association="Self.FK_Events_EventTypes">
+      <End Role="EventTypes" EntitySet="EventTypes" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserExtraRegParams_ExtraRegParams" Association="Self.FK_UserExtraRegParams_ExtraRegParams">
+      <End Role="ExtraRegParams" EntitySet="ExtraRegParams" />
+      <End Role="UserExtraRegParams" EntitySet="UserExtraRegParams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menus_Menus" Association="Self.FK_Menus_Menus">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="Menus1" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payments_PaymentPlans" Association="Self.FK_Payments_PaymentPlans">
+      <End Role="PaymentPlans" EntitySet="PaymentPlans" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsersTemplateSettings_Settings" Association="Self.FK_UsersTemplateSettings_Settings">
+      <End Role="Settings" EntitySet="Settings" />
+      <End Role="UsersTemplateSettings" EntitySet="UsersTemplateSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsersTemplateSettings_Templates" Association="Self.FK_UsersTemplateSettings_Templates">
+      <End Role="Templates" EntitySet="Templates" />
+      <End Role="UsersTemplateSettings" EntitySet="UsersTemplateSettings" />
+    </AssociationSet>
+    <AssociationSet Name="AccessToDiscountType" Association="Self.AccessToDiscountType">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="DiscountType" EntitySet="DiscountTypes" />
+    </AssociationSet>
+    <AssociationSet Name="AccessToEventTypes" Association="Self.AccessToEventTypes">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="EventTypes" EntitySet="EventTypes" />
+    </AssociationSet>
+    <AssociationSet Name="AccessToMenu" Association="Self.AccessToMenu">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="Menus" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="DiscountTypePaymentsPlans" Association="Self.DiscountTypePaymentsPlans">
+      <End Role="DiscountType" EntitySet="DiscountTypes" />
+      <End Role="PaymentPlans" EntitySet="PaymentPlans" />
+    </AssociationSet>
+    <AssociationSet Name="ReceivedExtraRegParams" Association="Self.ReceivedExtraRegParams">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="ExtraRegParams" EntitySet="ExtraRegParams" />
+    </AssociationSet>
+    <AssociationSet Name="TemplateSettings" Association="Self.TemplateSettings">
+      <End Role="Settings" EntitySet="Settings" />
+      <End Role="Templates" EntitySet="Templates" />
+    </AssociationSet>
+    <AssociationSet Name="UserComplitedTasks" Association="Self.UserComplitedTasks">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TaskToDo" EntitySet="TaskToDoes" />
+    </AssociationSet>
+    <AssociationSet Name="UserDiscounts" Association="Self.UserDiscounts">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Discounts" EntitySet="Discounts" />
+    </AssociationSet>
+    <FunctionImport Name="get_user_roles" ReturnType="Collection(bbomDb2Model.get_user_roles_Result)">
+      <Parameter Name="userName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(bbomDb2Model.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(bbomDb2Model.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="UpdateRoleForNotPayUsers" />
+  </EntityContainer>
+  <ComplexType Name="get_user_roles_Result">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="256" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,46 @@
+﻿@model bbom.Admin.Core.ViewModels.Registrator.CreateRegistratorViewModel
+@{
+    ViewBag.Title = "Создать регистратор";
+}
+<style>
+    .thumbnail img {
+        height: 100px;
+    }
+</style>
+<div class="panel panel-primary" style="margin-top: 20px">
+    <div class="panel-heading">@ViewBag.Title</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Create", "Registrators", FormMethod.Post, new { role = "form" }))
+        {
+            <h4 style="color: red;">@Html.ValidationSummary()</h4>
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", id = "name", style = "min-width: 100px;max-width: 300px;" })<br />
+            //
+            @Html.LabelFor(m => m.VideoUrl)
+            @Html.DropDownListFor(m => m.VideoUrl, (IEnumerable<SelectListItem>)ViewBag.VideoUrls, new { @class = "form-control", style = "min-width: 100px;max-width: 300px;" })<br />
+            <br/>
+            <label>Фон</label>
+            <select id="imagePicker" class="image-picker" name="imagePicker"></select>
+            <input id="modal_button_submit" type="submit" value="создать" class="btn btn-primary" />
+        }
+    </div>
+</div>
+@section Scripts{
+    <script id="imageTmpl" type="text/x-jquery-tmpl">
+        <option data-img-src="../../Content/img/bg/${name}" class="image-picker-img" value="${name}">${name}</option>
+    </script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetImages", "PersonalPageCreator")",
+                success: function(json) {
+                    for (var i = 0; i < json.length; i++) {
+                        $('#imageTmpl').tmpl(json[i]).appendTo('#imagePicker');
+                    }
+                    $("#imagePicker").imagepicker();
+                }
+            });
+        })
+    </script>
+}

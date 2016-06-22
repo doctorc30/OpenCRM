@@ -1,0 +1,87 @@
+﻿@using bbom.Admin.Core.Notifications
+@using bbom.Data.ModelPartials
+@using bbom.Data.ModelPartials.Constants
+@{
+    ViewBag.Title = "Мероприятия";
+}
+<style>
+    .result span {
+        /*padding: 22px 12px 15px;*/
+        display: inline-block;
+        /*margin: 0 8px 0 -5px;*/
+        font-size: 20px;
+        border-radius: 3px;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="~/Content/AdminLTE.min.css" />
+<div class="tab-pane active" id="timeline" style="padding: 40px;">
+    <!-- The timeline -->
+    <ul id="timeLineBody" class="timeline timeline-header">
+        <!-- timeline time label -->
+        <li class="time-label">
+            <span class="bg-online">
+                <h2 class="text-online">Расписание</h2>
+            </span>
+        </li>
+    </ul>
+</div>
+@section Scripts
+{
+    <script src="../../Scripts/Views/Timer.js"></script>
+    <script id="eventTmpl" type="text/x-jquery-tmpl">
+        <li>
+            <img src="${icon}" class="fa fa-envelope" style="width: 100px;left: 45px;top: -18px;">
+            <div class="timeline-item">
+                <span class="time"><i class="fa fa-clock-o"></i>${start}</span>
+                <h3 class="timeline-header">
+                    <a href="">${title}</a> <label id="isRun${name}" style="color: red; visibility: hidden;">Идет сейчас</label>
+                </h3>
+                <div class="timeline-body">
+                    ${description}
+                </div>                
+                <p id="startDatePlace${name}" class="result" style="float: right; margin-right: 10px">
+                    Начало через:
+                    <span id="Nhour${name}"></span><span>:</span>
+                    <span id="Nmin${name}"></span><span>:</span>
+                    <span id="Nsec${name}"></span>
+                </p>
+                <div class="timeline-footer">
+                    <span>Спикеры:</span> <i>${spiker}</i>
+                    <Br /> <Br /> <a href="@(Url.Action("Index", "Events") + "/Index/")${name}" class="btn btn-danger btn-xs">Войти в вебинарную комнату!</a>
+                </div>
+            </div>
+        </li>
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            //todo первести на typescript для использования в нескольких местах
+            if (window.userIsRole('@UserRole.NotWatch')) {
+                var notify = {};
+                notify.message = "Для дальнейшей работы с сайтом, вам необходимо посмотреть один из наших вебинаров во вкладке \"Мероприятия\"";
+                notify.type = "@AlertStyles.Information";
+                window.notify(notify);
+            }
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetEventsJson", "Events")" + "?typeId=@ViewBag.TyeId",
+                success: function(json) {
+                    for (var i = 0; i < json.length; i++) {
+                        $('#eventTmpl').tmpl(json[i]).appendTo('#timeLineBody');
+                        if (json[i].isShowDate) {
+                            var timer = new Timer($("#Nhour" + json[i].name), $("#Nmin" + json[i].name), $("#Nsec" + json[i].name));
+                            timer.start(json[i].start);
+                        } else {
+                            $("#startDatePlace" + json[i].name).css("visibility", "hidden");
+                        }
+                        if (json[i].isRun) {
+                            $("#isRun" + json[i].name).css("visibility", "visible");
+                        } else {
+                            $("#isRun" + json[i].name).css("visibility", "hidden");
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+}

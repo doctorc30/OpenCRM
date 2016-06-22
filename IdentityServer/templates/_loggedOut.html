@@ -1,0 +1,15 @@
+﻿<div class="page-header">
+    <h1>
+        Выход
+        <small>Вы вышли из системы :(</small>
+    </h1>
+    Сервисы Solomon:
+    <br />
+    <a href="http://bbom.solomon24.com">BBOM</a><br />
+    <a href="http://coin.solomon24.com">SARCOIN</a><br />
+    <div ng-show="model.redirectUrl">
+        Нажмите <a ng-href="{{model.redirectUrl}}">сюда</a> что бы вернуться к
+        <span ng-bind="model.clientName"></span>.
+    </div>
+    <iframe class="signout" ng-repeat="url in model.iFrameUrls" ng-src="{{url}}"></iframe>
+</div>

@@ -1,0 +1,92 @@
+﻿@model bbom.Admin.Core.ViewModels.Pay.PayViewModel
+@{
+    ViewBag.Title1 = "Тарифные планы";
+    ViewBag.Title2 = "Скидочные предложения";
+}
+@using (Html.BeginForm("StartPay", "Payment"))
+{
+    <div class="panel panel-primary" style="margin-top: 20px">
+        <div class="panel-heading">@ViewBag.Title1</div>
+        <div class="panel-body">
+            <div id="payments" class="form-group">
+                @Html.ValidationSummary()
+                @foreach (var paymentPlan in Model.PaymentPlans)
+                {
+                    <div class="panel panel-info">
+                        @paymentPlan.Name<br/>
+                        <strong>Цена</strong>
+                        @(paymentPlan.Amount.ToString("####.###")) руб.<br/>
+                        <label class="btn btn-primary">
+                            @Html.RadioButton("selectPlanId", paymentPlan.Id, new {onclick = "selectPlan(this)", data = @paymentPlan.Id})Выбрать
+                            @* <input type="radio" name="selectPlanId" id="@("option" + paymentPlan.Id)" data="@paymentPlan.Id" onclick="selectPlan(this)"> Выбрать*@
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div id="panelDiscounts" class="panel panel-primary" style="margin-top: 20px">
+        <div class="panel-heading">@ViewBag.Title2</div>
+        <div class="panel-body">
+            <div class="form-group">
+                @foreach (var discount in Model.Discounts)
+                {
+                    <div class="panel panel-info">
+                        @discount.Name<br/>
+                        <strong>Скидка</strong>
+                        @discount.DiscountAmount.ToString("###")%<br/>
+                        <label class="btn btn-primary">
+                            @Html.RadioButton("selectDiscountId", discount.Id)Выбрать
+                            @*<input type="radio" name="selectDiscountId" id="@("option" + discount.Id)" data="@discount.Id" onclick="selectDiscount(this)"> Выбрать*@
+                        </label>
+                    </div>
+                }
+                <div id="paymentDis"></div>
+            </div>
+        </div>
+    </div>
+    <input type="submit" value="Сформировать платеж" class="btn btn-default"/>
+}
+@section Scripts
+{
+    <script id="disTmpl" type="text/x-jquery-tmpl">
+        <div class="panel panel-info">
+            ${name}<br/>
+            <strong>Скидка</strong>
+            ${amount}%<br/>
+            <label class="btn btn-primary">
+                <input id="selectDiscountId" name="selectDiscountId" type="radio" value="${id}">Выбрать
+            </label>
+        </div>
+    </script>
+    <script>
+        var selectPlanId;
+        var selectDiscountId;
+        var discontCount = @Model.Discounts.Count;
+
+        $(document).ready(function() {
+            if (discontCount === 0) {
+                $("#panelDiscounts").css("display", "none");
+            }
+        });
+
+        function selectPlan(input) {
+            $("#paymentDis").empty();
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetPaymentDiscountsJson", "Payment")" + "?paymentId=" + $(input).attr("data"),
+                success: function(json) {
+                    if (json.length > 0)
+                        $("#panelDiscounts").css("display", "inherit");
+                    else {
+                        if (discontCount === 0)
+                            $("#panelDiscounts").css("display", "none");
+                    }
+                    for (var i = 0; i < json.length; i++) {
+                        $('#disTmpl').tmpl(json[i]).appendTo('#paymentDis');
+                    }
+                }
+            });
+        }
+    </script>
+}

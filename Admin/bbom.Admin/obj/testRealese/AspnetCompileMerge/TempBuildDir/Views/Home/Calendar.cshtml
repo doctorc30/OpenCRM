@@ -1,0 +1,293 @@
+﻿@model bbom.Data.Model.Event
+<div class="panel panel-default" style="margin-top: 20px">
+    <div class=" panel-heading">Ваш каледарь</div>
+    <div class="panel-body">
+        <div>
+            <button id="addEventButton" type="button" class="btn btn-primary" onclick="addEvent()">Добавить собыите</button>
+            <div id='calendar' style="margin-top: 20px"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ModalAddEvent -->
+<div class="modal fade" id="modalAddEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabelAddEvent" aria-hidden="true">
+    <div class="modal-dialog" style="width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabelAddEvent">Новое событие</h4>
+            </div>
+            <div class="modal-body" style="padding-left: 20px">
+                <form role="form">
+                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "form-control", id = "model_title"}})
+                        @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.TypeId, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.TypeId, (IEnumerable<SelectListItem>)ViewBag.EventTypes)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Url, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.EditorFor(model => model.Url, new {htmlAttributes = new {@class = "form-control", id = "model_url"}})
+                        @Html.ValidationMessageFor(model => model.Url, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StartDate, htmlAttributes: new
+                        {
+                            @class = "control-label col-md-2", id = "label_start"
+
+                        })
+                        @Html.EditorFor(model => model.StartDate, new {htmlAttributes = new {@class = "form-control", id = "model_start"}})
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EndDate, htmlAttributes: new {@class = "control-label col-md-2", id = "label_end"})
+                        @Html.EditorFor(model => model.EndDate, new {htmlAttributes = new {@class = "form-control", id = "model_end"}})
+                        @Html.ValidationMessageFor(model => model.EndDate, "", new {@class = "text-danger"})
+                    </div>
+                </form>
+                <div class="form-group">
+                    <input id="modal_button_submit" type="button" value="Добавить" class="btn btn-default"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        var editEvents = '@Url.Action("Edit", "Events")';
+        var getEventJsonEvents = "@Url.Action("GetEventJson", "Events")";
+        var getAllJsonEvents = "@Url.Action("GetAllJson", "Events")";
+        var addEvents = "@Url.Action("Add", "Events")";
+        var indexEvents = "@Url.Action("Index", "Events")";
+
+        $(document).ready(function() {
+            $.connection.hub.start();
+            drawCalendar();
+
+            $("#model_start").datetimepicker({
+                locale: 'ru',
+                format: "YYYY-MM-D HH:mm"
+            });
+
+            $("#model_end").datetimepicker({
+                locale: 'ru',
+                format: "YYYY-MM-D HH:mm"
+            });
+
+            $.connection.event.client.updateCalendarSR = function() {
+                updateCalendar();
+            };
+
+            if (!window.userIsRole("admin")) {
+                $("#addEventButton").css("visibility", "collapse");
+            }
+
+            $("#calendar").on("contextmenu", false);
+
+            $("#TypeId").select2();
+        });
+
+        function addEvent() {
+            $("#modal_button_submit").val("Добавить");
+            $("#modal_button_submit").off('click');
+            $("#modal_button_submit").on("click", function() {
+                createEvent();
+            });
+            $("#myModalLabelAddEvent").text("Новое событие");
+            $("#model_start").val('');
+            $("#model_end").val('');
+            $("#modalAddEvent").modal("show");
+        }
+
+        function showEventEditor(event) {
+            $("#model_start").val(event.start);
+            if (event.hasOwnProperty("end"))
+                $("#model_end").val(event.end);
+            if (event.hasOwnProperty("url"))
+                $("#model_url").val(event.url);
+            if (event.hasOwnProperty("typeId"))
+                $("#TypeId").select2().val(event.typeId).trigger("change");
+            if (event.hasOwnProperty("title")) {
+                $("#model_title").val(event.title);
+                $("#myModalLabelAddEvent").text("Изменение события " + event.title);
+                $("#modal_button_submit").val("Изменить");
+                $("#modal_button_submit").attr("name", event.name);
+                $("#modal_button_submit").off('click');
+                $("#modal_button_submit").on("click", function() {
+                    var title = $("#model_title").val();
+                    var start = $("#model_start").val();
+                    var end = $("#model_end").val();
+                    var url = $("#model_url").val();
+                    var typeId = $("#TypeId").select2().val();
+                    var evnt = {};
+                    evnt.title = title;
+                    evnt.start = start;
+                    evnt.end = end;
+                    evnt.url = url;
+                    evnt.name = event.name;
+                    evnt.typeId = typeId;
+                    editEvent(evnt, null);
+                });
+            }
+            $("#modalAddEvent").modal("show");
+        }
+
+        function editEvent(event, revertFunc) {
+            var evnt = {};
+            evnt.title = event.title;
+            evnt.start = event.start;
+            evnt.end = event.end;
+            evnt.url = event.url;
+            evnt.name = event.name;
+            evnt.typeId = event.typeId;
+            $.ajax({
+                type: "POST",
+                data: evnt,
+                url: "@Url.Action("Edit", "Events")",
+                accept: 'application/json',
+                success: function(noty) {
+                    window.notify(noty);
+                    $.connection.event.server.updateCalendar();
+                    if (revertFunc === null)
+                        updateCalendar();
+                },
+                error: function(noty) {
+                    window.notify(noty.responseJSON);
+                    if (revertFunc != null)
+                        revertFunc();
+                    updateCalendar();
+                }
+            });
+            $("#modalAddEvent").modal("hide");
+        }
+
+        function updateCalendar() {
+            $('#calendar').fullCalendar('destroy');
+            drawCalendar();
+        }
+
+        function getEventById(id, successCallback) {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetEventJson", "Events")" + "?id=" + id,
+                success: successCallback,
+                error: function(noty) {
+                    window.notify(noty.responseJSON);
+                }
+            });
+        }
+
+        function drawCalendar() {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetAllJson", "Events")",
+                success: function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var url = data[i].url;
+                        data[i].video = url;
+                        data[i].url = '@Url.Action("Index", "Events")' + "?id=" + data[i].name;
+                    }
+                    if (window.userIsRole("admin"))
+                        createCalendar('calendar', true, data);
+                    else {
+                        createCalendar('calendar', false, data);
+                    }
+                }
+            });
+        }
+
+        function createCalendar(name, editavle, data) {
+            if (editavle === true)
+                $('#' + name).fullCalendar({
+//                    dayClick: function(date) {
+//                        var event = {};
+//                        event.start = date;
+//                        addEvent();
+//                    },
+//                    eventResize: function(event, delta, revertFunc) {
+//                        var evnt = {};
+//                        evnt.title = event.title;
+//                        evnt.start = event.start.format();
+//                        evnt.end = event.end.format();
+//                        evnt.url = event.video;
+//                        evnt.name = event.name;
+//                        editEvent(evnt, revertFunc);
+//                    },
+                    eventDrop: function(event, delta, revertFunc) {
+                        var evnt = {};
+                        evnt.title = event.title;
+                        evnt.start = event.start.format();
+                        if (event.end == null)
+                            evnt.end = event.start.format();
+                        else
+                            evnt.end = event.end.format();
+                        evnt.url = event.video;
+                        evnt.name = event.name;
+                        editEvent(evnt, revertFunc);
+                    },
+                    eventRightclick: function(event) {
+                        getEventById(event.name, function(event) {
+                            showEventEditor(event);
+                        });
+                    },
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    lang: 'ru',
+                    timeFormat: 'H(:mm)',
+                    editable: editavle,
+                    eventLimit: true, // allow "more" link when too many events
+                    events: data
+                });
+            else {
+                $('#' + name).fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    lang: 'ru',
+                    timeFormat: 'H(:mm)',
+                    editable: editavle,
+                    eventLimit: true, // allow "more" link when too many events
+                    events: data
+                });
+            }
+        }
+
+        function createEvent() {
+            var title = $("#model_title").val();
+            var start = $("#model_start").val();
+            var end = $("#model_end").val();
+            var url = $("#model_url").val();
+            var typeId = $("#TypeId").select2().val();
+            var evnt = {};
+            evnt.title = title;
+            evnt.start = start;
+            evnt.end = end;
+            evnt.url = url;
+            evnt.typeId = typeId;
+            $.ajax({
+                type: "POST",
+                data: evnt,
+                url: "@Url.Action("Add", "Events")",
+                accept: 'application/json',
+                success: function(noty) {
+                    window.notify(noty);
+                    updateCalendar();
+                    $.connection.event.server.updateCalendar();
+                }
+            });
+        }
+
+    </script>
+}

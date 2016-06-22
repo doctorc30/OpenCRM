@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Все посты";
+}
+<style>
+    .tablBtn {
+        margin: 5px;
+    }
+</style>
+<div class="panel panel-primary" style="margin-top: 20px">
+    <div class="panel-heading">@ViewBag.Title</div>
+    <div class="panel-body">
+        <div id="tablePostParent">
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/Views/TableGenerator/TableGenerator.js"></script>
+    <script>
+        $(document)
+            .ready(function() {
+                new TableGenerator("tablePostParent", "Post", function(tm) {
+                    $("#" + tm.name).addClass("table table-striped table-bordered");
+                    $("#" + tm.name).attr("width", "100%");
+                });
+            });
+    </script>
+}

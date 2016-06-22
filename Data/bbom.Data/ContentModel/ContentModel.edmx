@@ -1,0 +1,1206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище bbomContentDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccessToEventTypes">
+          <Key>
+            <PropertyRef Name="EventTypeId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="EventTypeId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccessToMenu">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DefaultSettingsValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SettingId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="varchar(max)" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="128" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Url" Type="varchar(max)" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Spiker" Type="varchar(max)" />
+          <Property Name="Icon" Type="varchar" MaxLength="200" />
+          <Property Name="Stats" Type="int" />
+        </EntityType>
+        <EntityType Name="EventSpikers">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="SpikerId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="SpikerId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EventTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExtraRegParams">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discription" Type="nvarchar" MaxLength="200" />
+          <Property Name="Icon" Type="nvarchar(max)" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Enable" Type="int" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="OrderNum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReceivedExtraRegParams">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ExtraRegParamId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ExtraRegParamId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registrator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistratorSettings">
+          <Key>
+            <PropertyRef Name="RegistratorId" />
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="RegistratorId" Type="int" Nullable="false" />
+          <Property Name="SettingId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TaskToDo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Templates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Header" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Footer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsDefault" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Links" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TemplateSettings">
+          <Key>
+            <PropertyRef Name="TemplateId" />
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="TemplateId" Type="int" Nullable="false" />
+          <Property Name="SettingId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserComplitedTasks">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserExtraRegParams">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ExtraRegParamId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ExtraRegParamId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UsersTemplateSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TemplateId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SettingId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AccessToEventTypes_EventTypes">
+          <End Role="EventTypes" Type="Self.EventTypes" Multiplicity="1" />
+          <End Role="AccessToEventTypes" Type="Self.AccessToEventTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccessToEventTypes">
+              <PropertyRef Name="EventTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccessToMenu_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
+          <End Role="AccessToMenu" Type="Self.AccessToMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccessToMenu">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DefaultSettingsValues_Settings">
+          <End Role="Settings" Type="Self.Settings" Multiplicity="1" />
+          <End Role="DefaultSettingsValues" Type="Self.DefaultSettingsValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultSettingsValues">
+              <PropertyRef Name="SettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_EventTypes">
+          <End Role="EventTypes" Type="Self.EventTypes" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventSpikers_Events">
+          <End Role="Events" Type="Self.Events" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EventSpikers" Type="Self.EventSpikers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventSpikers">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
+          <End Role="Menus1" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menus1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_PostTypes">
+          <End Role="PostTypes" Type="Self.PostTypes" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceivedExtraRegParams_ExtraRegParams">
+          <End Role="ExtraRegParams" Type="Self.ExtraRegParams" Multiplicity="1" />
+          <End Role="ReceivedExtraRegParams" Type="Self.ReceivedExtraRegParams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExtraRegParams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceivedExtraRegParams">
+              <PropertyRef Name="ExtraRegParamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistratorSettings_Registrator">
+          <End Role="Registrator" Type="Self.Registrator" Multiplicity="1" />
+          <End Role="RegistratorSettings" Type="Self.RegistratorSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registrator">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistratorSettings">
+              <PropertyRef Name="RegistratorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistratorSettings_Settings">
+          <End Role="Settings" Type="Self.Settings" Multiplicity="1" />
+          <End Role="RegistratorSettings" Type="Self.RegistratorSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistratorSettings">
+              <PropertyRef Name="SettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateSettings_Settings">
+          <End Role="Settings" Type="Self.Settings" Multiplicity="1" />
+          <End Role="TemplateSettings" Type="Self.TemplateSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateSettings">
+              <PropertyRef Name="SettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateSettings_Templates">
+          <End Role="Templates" Type="Self.Templates" Multiplicity="1" />
+          <End Role="TemplateSettings" Type="Self.TemplateSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateSettings">
+              <PropertyRef Name="TemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserComplitedTasks_Tasks">
+          <End Role="TaskToDo" Type="Self.TaskToDo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserComplitedTasks" Type="Self.UserComplitedTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskToDo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComplitedTasks">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserExtraRegParams_ExtraRegParams">
+          <End Role="ExtraRegParams" Type="Self.ExtraRegParams" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserExtraRegParams" Type="Self.UserExtraRegParams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExtraRegParams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserExtraRegParams">
+              <PropertyRef Name="ExtraRegParamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTemplateSettings_Settings">
+          <End Role="Settings" Type="Self.Settings" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UsersTemplateSettings" Type="Self.UsersTemplateSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersTemplateSettings">
+              <PropertyRef Name="SettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTemplateSettings_Templates">
+          <End Role="Templates" Type="Self.Templates" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UsersTemplateSettings" Type="Self.UsersTemplateSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersTemplateSettings">
+              <PropertyRef Name="TemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище bbomContentDbModelContainer">
+          <EntitySet Name="AccessToEventTypes" EntityType="Self.AccessToEventTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccessToMenu" EntityType="Self.AccessToMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DefaultSettingsValues" EntityType="Self.DefaultSettingsValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventSpikers" EntityType="Self.EventSpikers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventTypes" EntityType="Self.EventTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtraRegParams" EntityType="Self.ExtraRegParams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostTypes" EntityType="Self.PostTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceivedExtraRegParams" EntityType="Self.ReceivedExtraRegParams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registrator" EntityType="Self.Registrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistratorSettings" EntityType="Self.RegistratorSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskToDo" EntityType="Self.TaskToDo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Templates" EntityType="Self.Templates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateSettings" EntityType="Self.TemplateSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserComplitedTasks" EntityType="Self.UserComplitedTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserExtraRegParams" EntityType="Self.UserExtraRegParams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersTemplateSettings" EntityType="Self.UsersTemplateSettings" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AccessToEventTypes_EventTypes" Association="Self.FK_AccessToEventTypes_EventTypes">
+            <End Role="EventTypes" EntitySet="EventTypes" />
+            <End Role="AccessToEventTypes" EntitySet="AccessToEventTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccessToMenu_Menus" Association="Self.FK_AccessToMenu_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="AccessToMenu" EntitySet="AccessToMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DefaultSettingsValues_Settings" Association="Self.FK_DefaultSettingsValues_Settings">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="DefaultSettingsValues" EntitySet="DefaultSettingsValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_EventTypes" Association="Self.FK_Events_EventTypes">
+            <End Role="EventTypes" EntitySet="EventTypes" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventSpikers_Events" Association="Self.FK_EventSpikers_Events">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventSpikers" EntitySet="EventSpikers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_Menus" Association="Self.FK_Menus_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Menus1" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_PostTypes" Association="Self.FK_Posts_PostTypes">
+            <End Role="PostTypes" EntitySet="PostTypes" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceivedExtraRegParams_ExtraRegParams" Association="Self.FK_ReceivedExtraRegParams_ExtraRegParams">
+            <End Role="ExtraRegParams" EntitySet="ExtraRegParams" />
+            <End Role="ReceivedExtraRegParams" EntitySet="ReceivedExtraRegParams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistratorSettings_Registrator" Association="Self.FK_RegistratorSettings_Registrator">
+            <End Role="Registrator" EntitySet="Registrator" />
+            <End Role="RegistratorSettings" EntitySet="RegistratorSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistratorSettings_Settings" Association="Self.FK_RegistratorSettings_Settings">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="RegistratorSettings" EntitySet="RegistratorSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateSettings_Settings" Association="Self.FK_TemplateSettings_Settings">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="TemplateSettings" EntitySet="TemplateSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateSettings_Templates" Association="Self.FK_TemplateSettings_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="TemplateSettings" EntitySet="TemplateSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserComplitedTasks_Tasks" Association="Self.FK_UserComplitedTasks_Tasks">
+            <End Role="TaskToDo" EntitySet="TaskToDo" />
+            <End Role="UserComplitedTasks" EntitySet="UserComplitedTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserExtraRegParams_ExtraRegParams" Association="Self.FK_UserExtraRegParams_ExtraRegParams">
+            <End Role="ExtraRegParams" EntitySet="ExtraRegParams" />
+            <End Role="UserExtraRegParams" EntitySet="UserExtraRegParams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTemplateSettings_Settings" Association="Self.FK_UsersTemplateSettings_Settings">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="UsersTemplateSettings" EntitySet="UsersTemplateSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTemplateSettings_Templates" Association="Self.FK_UsersTemplateSettings_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="UsersTemplateSettings" EntitySet="UsersTemplateSettings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bbomContentDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccessToEventType">
+          <Key>
+            <PropertyRef Name="EventTypeId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="EventTypeId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EventType" Relationship="Self.FK_AccessToEventTypes_EventTypes" FromRole="AccessToEventTypes" ToRole="EventTypes" />
+        </EntityType>
+        <EntityType Name="AccessToMenu">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_AccessToMenu_Menus" FromRole="AccessToMenu" ToRole="Menus" />
+        </EntityType>
+        <EntityType Name="DefaultSettingsValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SettingId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Setting" Relationship="Self.FK_DefaultSettingsValues_Settings" FromRole="DefaultSettingsValues" ToRole="Settings" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Spiker" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Icon" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Stats" Type="Int32" />
+          <NavigationProperty Name="EventType" Relationship="Self.FK_Events_EventTypes" FromRole="Events" ToRole="EventTypes" />
+          <NavigationProperty Name="EventSpikers" Relationship="Self.FK_EventSpikers_Events" FromRole="Events" ToRole="EventSpikers" />
+        </EntityType>
+        <EntityType Name="EventSpiker">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="SpikerId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="SpikerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_EventSpikers_Events" FromRole="EventSpikers" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="EventType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AccessToEventTypes" Relationship="Self.FK_AccessToEventTypes_EventTypes" FromRole="EventTypes" ToRole="AccessToEventTypes" />
+          <NavigationProperty Name="Events" Relationship="Self.FK_Events_EventTypes" FromRole="EventTypes" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="ExtraRegParam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ReceivedExtraRegParams" Relationship="Self.FK_ReceivedExtraRegParams_ExtraRegParams" FromRole="ExtraRegParams" ToRole="ReceivedExtraRegParams" />
+          <NavigationProperty Name="UserExtraRegParams" Relationship="Self.FK_UserExtraRegParams_ExtraRegParams" FromRole="ExtraRegParams" ToRole="UserExtraRegParams" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enable" Type="Int32" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="OrderNum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccessToMenus" Relationship="Self.FK_AccessToMenu_Menus" FromRole="Menus" ToRole="AccessToMenu" />
+          <NavigationProperty Name="Menus1" Relationship="Self.FK_Menus_Menus" FromRole="Menus" ToRole="Menus1" />
+          <NavigationProperty Name="Menu1" Relationship="Self.FK_Menus_Menus" FromRole="Menus1" ToRole="Menus" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PostType" Relationship="Self.FK_Posts_PostTypes" FromRole="Posts" ToRole="PostTypes" />
+        </EntityType>
+        <EntityType Name="PostType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_PostTypes" FromRole="PostTypes" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="ReceivedExtraRegParam">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ExtraRegParamId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExtraRegParamId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ExtraRegParam" Relationship="Self.FK_ReceivedExtraRegParams_ExtraRegParams" FromRole="ReceivedExtraRegParams" ToRole="ExtraRegParams" />
+        </EntityType>
+        <EntityType Name="Registrator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RegistratorSettings" Relationship="Self.FK_RegistratorSettings_Registrator" FromRole="Registrator" ToRole="RegistratorSettings" />
+        </EntityType>
+        <EntityType Name="RegistratorSetting">
+          <Key>
+            <PropertyRef Name="RegistratorId" />
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="RegistratorId" Type="Int32" Nullable="false" />
+          <Property Name="SettingId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Registrator" Relationship="Self.FK_RegistratorSettings_Registrator" FromRole="RegistratorSettings" ToRole="Registrator" />
+          <NavigationProperty Name="Setting" Relationship="Self.FK_RegistratorSettings_Settings" FromRole="RegistratorSettings" ToRole="Settings" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DefaultSettingsValues" Relationship="Self.FK_DefaultSettingsValues_Settings" FromRole="Settings" ToRole="DefaultSettingsValues" />
+          <NavigationProperty Name="RegistratorSettings" Relationship="Self.FK_RegistratorSettings_Settings" FromRole="Settings" ToRole="RegistratorSettings" />
+          <NavigationProperty Name="UsersTemplateSettings" Relationship="Self.FK_UsersTemplateSettings_Settings" FromRole="Settings" ToRole="UsersTemplateSettings" />
+          <NavigationProperty Name="Templates" Relationship="Self.TemplateSettings" FromRole="Settings" ToRole="Templates" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TaskToDo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserComplitedTasks" Relationship="Self.FK_UserComplitedTasks_Tasks" FromRole="TaskToDo" ToRole="UserComplitedTasks" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Header" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Footer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDefault" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Links" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UsersTemplateSettings" Relationship="Self.FK_UsersTemplateSettings_Templates" FromRole="Templates" ToRole="UsersTemplateSettings" />
+          <NavigationProperty Name="Settings" Relationship="Self.TemplateSettings" FromRole="Templates" ToRole="Settings" />
+        </EntityType>
+        <EntityType Name="UserComplitedTask">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TaskToDo" Relationship="Self.FK_UserComplitedTasks_Tasks" FromRole="UserComplitedTasks" ToRole="TaskToDo" />
+        </EntityType>
+        <EntityType Name="UserExtraRegParam">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ExtraRegParamId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExtraRegParamId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ExtraRegParam" Relationship="Self.FK_UserExtraRegParams_ExtraRegParams" FromRole="UserExtraRegParams" ToRole="ExtraRegParams" />
+        </EntityType>
+        <EntityType Name="UsersTemplateSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TemplateId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SettingId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Setting" Relationship="Self.FK_UsersTemplateSettings_Settings" FromRole="UsersTemplateSettings" ToRole="Settings" />
+          <NavigationProperty Name="Template" Relationship="Self.FK_UsersTemplateSettings_Templates" FromRole="UsersTemplateSettings" ToRole="Templates" />
+        </EntityType>
+        <Association Name="FK_AccessToEventTypes_EventTypes">
+          <End Role="EventTypes" Type="Self.EventType" Multiplicity="1" />
+          <End Role="AccessToEventTypes" Type="Self.AccessToEventType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccessToEventTypes">
+              <PropertyRef Name="EventTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccessToMenu_Menus">
+          <End Role="Menus" Type="Self.Menu" Multiplicity="1" />
+          <End Role="AccessToMenu" Type="Self.AccessToMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccessToMenu">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DefaultSettingsValues_Settings">
+          <End Role="Settings" Type="Self.Setting" Multiplicity="1" />
+          <End Role="DefaultSettingsValues" Type="Self.DefaultSettingsValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultSettingsValues">
+              <PropertyRef Name="SettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_EventTypes">
+          <End Role="EventTypes" Type="Self.EventType" Multiplicity="1" />
+          <End Role="Events" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventSpikers_Events">
+          <End Role="Events" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EventSpikers" Type="Self.EventSpiker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventSpikers">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceivedExtraRegParams_ExtraRegParams">
+          <End Role="ExtraRegParams" Type="Self.ExtraRegParam" Multiplicity="1" />
+          <End Role="ReceivedExtraRegParams" Type="Self.ReceivedExtraRegParam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExtraRegParams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceivedExtraRegParams">
+              <PropertyRef Name="ExtraRegParamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserExtraRegParams_ExtraRegParams">
+          <End Role="ExtraRegParams" Type="Self.ExtraRegParam" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserExtraRegParams" Type="Self.UserExtraRegParam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExtraRegParams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserExtraRegParams">
+              <PropertyRef Name="ExtraRegParamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_Menus">
+          <End Role="Menus" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menus1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menus1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_PostTypes">
+          <End Role="PostTypes" Type="Self.PostType" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistratorSettings_Registrator">
+          <End Role="Registrator" Type="Self.Registrator" Multiplicity="1" />
+          <End Role="RegistratorSettings" Type="Self.RegistratorSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registrator">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistratorSettings">
+              <PropertyRef Name="RegistratorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistratorSettings_Settings">
+          <End Role="Settings" Type="Self.Setting" Multiplicity="1" />
+          <End Role="RegistratorSettings" Type="Self.RegistratorSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistratorSettings">
+              <PropertyRef Name="SettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTemplateSettings_Settings">
+          <End Role="Settings" Type="Self.Setting" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UsersTemplateSettings" Type="Self.UsersTemplateSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersTemplateSettings">
+              <PropertyRef Name="SettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserComplitedTasks_Tasks">
+          <End Role="TaskToDo" Type="Self.TaskToDo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserComplitedTasks" Type="Self.UserComplitedTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskToDo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComplitedTasks">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTemplateSettings_Templates">
+          <End Role="Templates" Type="Self.Template" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UsersTemplateSettings" Type="Self.UsersTemplateSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersTemplateSettings">
+              <PropertyRef Name="TemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TemplateSettings">
+          <End Role="Settings" Type="Self.Setting" Multiplicity="*" />
+          <End Role="Templates" Type="Self.Template" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ContentDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccessToEventTypes" EntityType="Self.AccessToEventType" />
+          <EntitySet Name="AccessToMenus" EntityType="Self.AccessToMenu" />
+          <EntitySet Name="DefaultSettingsValues" EntityType="Self.DefaultSettingsValue" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="EventSpikers" EntityType="Self.EventSpiker" />
+          <EntitySet Name="EventTypes" EntityType="Self.EventType" />
+          <EntitySet Name="ExtraRegParams" EntityType="Self.ExtraRegParam" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="Posts" EntityType="Self.Post" />
+          <EntitySet Name="PostTypes" EntityType="Self.PostType" />
+          <EntitySet Name="ReceivedExtraRegParams" EntityType="Self.ReceivedExtraRegParam" />
+          <EntitySet Name="Registrators" EntityType="Self.Registrator" />
+          <EntitySet Name="RegistratorSettings" EntityType="Self.RegistratorSetting" />
+          <EntitySet Name="Settings" EntityType="Self.Setting" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TaskToDoes" EntityType="Self.TaskToDo" />
+          <EntitySet Name="Templates" EntityType="Self.Template" />
+          <EntitySet Name="UserComplitedTasks" EntityType="Self.UserComplitedTask" />
+          <EntitySet Name="UserExtraRegParams" EntityType="Self.UserExtraRegParam" />
+          <EntitySet Name="UsersTemplateSettings" EntityType="Self.UsersTemplateSetting" />
+          <AssociationSet Name="FK_AccessToEventTypes_EventTypes" Association="Self.FK_AccessToEventTypes_EventTypes">
+            <End Role="EventTypes" EntitySet="EventTypes" />
+            <End Role="AccessToEventTypes" EntitySet="AccessToEventTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccessToMenu_Menus" Association="Self.FK_AccessToMenu_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="AccessToMenu" EntitySet="AccessToMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DefaultSettingsValues_Settings" Association="Self.FK_DefaultSettingsValues_Settings">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="DefaultSettingsValues" EntitySet="DefaultSettingsValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_EventTypes" Association="Self.FK_Events_EventTypes">
+            <End Role="EventTypes" EntitySet="EventTypes" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventSpikers_Events" Association="Self.FK_EventSpikers_Events">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventSpikers" EntitySet="EventSpikers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceivedExtraRegParams_ExtraRegParams" Association="Self.FK_ReceivedExtraRegParams_ExtraRegParams">
+            <End Role="ExtraRegParams" EntitySet="ExtraRegParams" />
+            <End Role="ReceivedExtraRegParams" EntitySet="ReceivedExtraRegParams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserExtraRegParams_ExtraRegParams" Association="Self.FK_UserExtraRegParams_ExtraRegParams">
+            <End Role="ExtraRegParams" EntitySet="ExtraRegParams" />
+            <End Role="UserExtraRegParams" EntitySet="UserExtraRegParams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_Menus" Association="Self.FK_Menus_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Menus1" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_PostTypes" Association="Self.FK_Posts_PostTypes">
+            <End Role="PostTypes" EntitySet="PostTypes" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistratorSettings_Registrator" Association="Self.FK_RegistratorSettings_Registrator">
+            <End Role="Registrator" EntitySet="Registrators" />
+            <End Role="RegistratorSettings" EntitySet="RegistratorSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistratorSettings_Settings" Association="Self.FK_RegistratorSettings_Settings">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="RegistratorSettings" EntitySet="RegistratorSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTemplateSettings_Settings" Association="Self.FK_UsersTemplateSettings_Settings">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="UsersTemplateSettings" EntitySet="UsersTemplateSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserComplitedTasks_Tasks" Association="Self.FK_UserComplitedTasks_Tasks">
+            <End Role="TaskToDo" EntitySet="TaskToDoes" />
+            <End Role="UserComplitedTasks" EntitySet="UserComplitedTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTemplateSettings_Templates" Association="Self.FK_UsersTemplateSettings_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="UsersTemplateSettings" EntitySet="UsersTemplateSettings" />
+          </AssociationSet>
+          <AssociationSet Name="TemplateSettings" Association="Self.TemplateSettings">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="Templates" EntitySet="Templates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище bbomContentDbModelContainer" CdmEntityContainer="ContentDbEntities">
+          <EntitySetMapping Name="AccessToEventTypes">
+            <EntityTypeMapping TypeName="bbomContentDbModel.AccessToEventType">
+              <MappingFragment StoreEntitySet="AccessToEventTypes">
+                <ScalarProperty Name="EventTypeId" ColumnName="EventTypeId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccessToMenus">
+            <EntityTypeMapping TypeName="bbomContentDbModel.AccessToMenu">
+              <MappingFragment StoreEntitySet="AccessToMenu">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DefaultSettingsValues">
+            <EntityTypeMapping TypeName="bbomContentDbModel.DefaultSettingsValue">
+              <MappingFragment StoreEntitySet="DefaultSettingsValues">
+                <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="bbomContentDbModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Spiker" ColumnName="Spiker" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventSpikers">
+            <EntityTypeMapping TypeName="bbomContentDbModel.EventSpiker">
+              <MappingFragment StoreEntitySet="EventSpikers">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="SpikerId" ColumnName="SpikerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventTypes">
+            <EntityTypeMapping TypeName="bbomContentDbModel.EventType">
+              <MappingFragment StoreEntitySet="EventTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExtraRegParams">
+            <EntityTypeMapping TypeName="bbomContentDbModel.ExtraRegParam">
+              <MappingFragment StoreEntitySet="ExtraRegParams">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="bbomContentDbModel.Menu">
+              <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="bbomContentDbModel.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostTypes">
+            <EntityTypeMapping TypeName="bbomContentDbModel.PostType">
+              <MappingFragment StoreEntitySet="PostTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceivedExtraRegParams">
+            <EntityTypeMapping TypeName="bbomContentDbModel.ReceivedExtraRegParam">
+              <MappingFragment StoreEntitySet="ReceivedExtraRegParams">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ExtraRegParamId" ColumnName="ExtraRegParamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrators">
+            <EntityTypeMapping TypeName="bbomContentDbModel.Registrator">
+              <MappingFragment StoreEntitySet="Registrator">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistratorSettings">
+            <EntityTypeMapping TypeName="bbomContentDbModel.RegistratorSetting">
+              <MappingFragment StoreEntitySet="RegistratorSettings">
+                <ScalarProperty Name="RegistratorId" ColumnName="RegistratorId" />
+                <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="bbomContentDbModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="bbomContentDbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskToDoes">
+            <EntityTypeMapping TypeName="bbomContentDbModel.TaskToDo">
+              <MappingFragment StoreEntitySet="TaskToDo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="bbomContentDbModel.Template">
+              <MappingFragment StoreEntitySet="Templates">
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Footer" ColumnName="Footer" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Links" ColumnName="Links" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserComplitedTasks">
+            <EntityTypeMapping TypeName="bbomContentDbModel.UserComplitedTask">
+              <MappingFragment StoreEntitySet="UserComplitedTasks">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserExtraRegParams">
+            <EntityTypeMapping TypeName="bbomContentDbModel.UserExtraRegParam">
+              <MappingFragment StoreEntitySet="UserExtraRegParams">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ExtraRegParamId" ColumnName="ExtraRegParamId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersTemplateSettings">
+            <EntityTypeMapping TypeName="bbomContentDbModel.UsersTemplateSetting">
+              <MappingFragment StoreEntitySet="UsersTemplateSettings">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TemplateSettings" TypeName="bbomContentDbModel.TemplateSettings" StoreEntitySet="TemplateSettings">
+            <EndProperty Name="Settings">
+              <ScalarProperty Name="Id" ColumnName="SettingId" />
+            </EndProperty>
+            <EndProperty Name="Templates">
+              <ScalarProperty Name="Id" ColumnName="TemplateId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

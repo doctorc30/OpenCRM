@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{18B79F27-613F-4820-90A2-F441865CEF38}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>bbom.Data</RootNamespace>
+    <AssemblyName>bbom.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Branch|AnyCPU'">
+    <OutputPath>bin\Branch\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Admin|AnyCPU'">
+    <OutputPath>bin\Admin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'localRealese|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\localRealese\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'testRealese|AnyCPU'">
+    <OutputPath>bin\testRealese\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ContentModelPartials\AccessToEventType.cs" />
+    <Compile Include="ContentModelPartials\AccessToMenu.cs" />
+    <Compile Include="ContentModelPartials\UserExtraRegParam.cs" />
+    <Compile Include="ContentModel\AccessToEventType.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\AccessToMenu.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\ContentModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContentModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\ContentModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\ContentModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContentModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\DefaultSettingsValue.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\Event.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\EventSpiker.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\EventType.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\ExtraRegParam.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\Menu.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\Post.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\PostType.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\ReceivedExtraRegParam.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\Registrator.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\RegistratorSetting.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\Setting.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\sysdiagram.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\TaskToDo.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\Template.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\UserComplitedTask.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\UserExtraRegParam.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentModel\UsersTemplateSetting.cs">
+      <DependentUpon>ContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataFasade.cs" />
+    <Compile Include="IdentityModelPartials\AspNetUserPartial.cs" />
+    <Compile Include="IdentityModel\AspNetRole.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\AspNetUser.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\AspNetUserClaim.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\AspNetUserLogin.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\Communicatio.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\Discount.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\DiscountType.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\IdentityModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IdentityModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\IdentityModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\IdentityModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IdentityModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\Payment.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\PaymentPlan.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\UserCommunication.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModel\UserInvitedDiscount.cs">
+      <DependentUpon>IdentityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MetaData\EventMetaData.cs" />
+    <Compile Include="MetaData\PostMetaData.cs" />
+    <Compile Include="IdentityModelPartials\AspNetRolesPartial.cs" />
+    <Compile Include="IdentityModelPartials\Comparers\AspNetUserComparer.cs" />
+    <Compile Include="ModelPartials\AspNetUserPartial.cs" />
+    <Compile Include="ModelPartials\Constants\ClaimType.cs" />
+    <Compile Include="ModelPartials\Constants\DiscountType.cs" />
+    <Compile Include="ModelPartials\Constants\DiscountTypeStatus.cs" />
+    <Compile Include="ModelPartials\Constants\EventStatus.cs" />
+    <Compile Include="ModelPartials\Constants\EventTypeConst.cs" />
+    <Compile Include="ModelPartials\Constants\PaymentPlanStatus.cs" />
+    <Compile Include="ContentModelPartials\Event.cs" />
+    <Compile Include="IdentityModelPartials\Comparers\EventComparer.cs" />
+    <Compile Include="IdentityModelPartials\Comparers\MenuComparer.cs" />
+    <Compile Include="IdentityModelPartials\Comparers\PaymentComparer.cs" />
+    <Compile Include="ModelPartials\Constants\PaymentStatus.cs" />
+    <Compile Include="ModelPartials\Constants\PostType.cs" />
+    <Compile Include="ModelPartials\Constants\SettingType.cs" />
+    <Compile Include="ModelPartials\IAccessSecurity.cs" />
+    <Compile Include="ModelPartials\Setting.cs" />
+    <Compile Include="ModelPartials\Constants\UserRole.cs" />
+    <Compile Include="NinjectDataCore.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ContextMenager.cs" />
+    <Compile Include="Repository\Imp\Entity.cs" />
+    <Compile Include="Repository\Imp\Repository.cs" />
+    <Compile Include="Repository\Interfaces\IDataContext.cs" />
+    <Compile Include="Repository\Interfaces\IRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="IdentityModel\IdentityModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IdentityModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="ContentModel\ContentModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ContentModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ContentModel\ContentModel.edmx.diagram">
+      <DependentUpon>ContentModel.edmx</DependentUpon>
+    </None>
+    <None Include="IdentityModel\IdentityModel.edmx.diagram">
+      <DependentUpon>IdentityModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ContentModel\ContentModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ContentModel.edmx</DependentUpon>
+      <LastGenOutput>ContentModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ContentModel\ContentModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ContentModel.edmx</DependentUpon>
+      <LastGenOutput>ContentModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="IdentityModel\IdentityModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IdentityModel.edmx</DependentUpon>
+      <LastGenOutput>IdentityModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="IdentityModel\IdentityModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IdentityModel.edmx</DependentUpon>
+      <LastGenOutput>IdentityModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

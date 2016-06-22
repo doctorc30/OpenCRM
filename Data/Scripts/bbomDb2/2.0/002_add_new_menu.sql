@@ -1,0 +1,2 @@
+use bbomDb2
+INSERT INTO dbo.Menus (Name, Discription, Icon, Action, Controller, Enable, ParentId, OrderNum) VALUES ('Информация', 'glyph stroked eye', '#stroked-eye', 'Information', 'Home', 1, null, 13);

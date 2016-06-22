@@ -1,0 +1,69 @@
+﻿@model bbom.Admin.Core.ViewModels.Account.PersonalRegisterViewModel
+@{
+    ViewBag.Title = "Создать сайт";
+}
+<style>
+    .thumbnail img {
+        height: 100px;
+    }
+</style>
+<div class="panel panel-primary" style="margin-top: 20px">
+    <div class="panel-heading">@ViewBag.Title</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Register", "PersonalPageCreator", FormMethod.Post, new {role = "form"}))
+        {
+            @Html.AntiForgeryToken()
+            <h4 style="color: red;">@Html.ValidationSummary()</h4>
+            //
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", id = "name", style = "min-width: 100px;max-width: 300px;" })<br/>
+            //
+            @Html.LabelFor(m => m.Suname)
+            @Html.TextBoxFor(m => m.Suname, new { @class = "form-control", id = "suname", style = "min-width: 100px;max-width: 300px;" })<br />
+            //
+            <label>Имя сайта</label><br/>
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", style = "display: inline; min-width: 100px;max-width: 300px;", id = "userName" })<label>.solomon24.com</label><br/><br />
+            //
+            @Html.LabelFor(m => m.VideoUrl)
+            @Html.DropDownListFor(m => m.VideoUrl, (IEnumerable<SelectListItem>)ViewBag.VideoUrls, new { @class = "form-control", style = "min-width: 100px;max-width: 300px;" })<br />
+            //
+            @Html.LabelFor(m => m.SelectParamId)
+            @Html.DropDownListFor(m => m.SelectParamId, (IEnumerable<SelectListItem>)ViewBag.Params, new { @class = "form-control", style = "min-width: 100px;max-width: 300px;" })<br />
+            //
+            @Html.LabelFor(m => m.DiscountId)
+            @Html.DropDownListFor(m => m.DiscountId, (IEnumerable<SelectListItem>)ViewBag.Discounts, new { @class = "form-control", style = "min-width: 100px;max-width: 300px;" })
+            <br/>
+            <label>Фон</label>
+            <select id="imagePicker" class="image-picker" name="imagePicker"></select>
+            <input id="modal_button_submit" type="submit" value="создать" class="btn btn-primary"/>
+        }
+
+    </div>
+</div>
+@section Scripts{
+    <script id="imageTmpl" type="text/x-jquery-tmpl">
+        <option data-img-src="../../Content/img/bg/${name}" class="image-picker-img" value="${name}">${name}</option>
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#userName').liTranslit({
+                elAlias: $('#userName')
+            });
+
+            $('#name').liTranslit({
+                elAlias: $('#userName')
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetImages", "PersonalPageCreator")",
+                success: function(json) {
+                    for (var i = 0; i < json.length; i++) {
+                        $('#imageTmpl').tmpl(json[i]).appendTo('#imagePicker');
+                    }
+                    $("#imagePicker").imagepicker();
+                }
+            });
+        })
+    </script>
+}

@@ -1,0 +1,179 @@
+﻿<error errorId="89de08d6-8580-4b91-a567-13491096d6a0" application="/LM/W3SVC/2/ROOT" host="BIOHAZARD" type="bbom.Admin.Core.Exceptions.NoPermisionException" message="Недостаточно прав доступа" source="bbom.Admin" detail="bbom.Admin.Core.Exceptions.NoPermisionException: Недостаточно прав доступа&#xD;&#xA;   в bbom.Admin.Controllers.EventsController.Index(Int32 id) в D:\My documents\Visual Studio 2015\Projects\bbom\Admin\bbom.Admin\Controllers\EventsController.cs:строка 40&#xD;&#xA;   в lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   в System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)&#xD;&#xA;   в System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.ActionInvocation.InvokeSynchronousActionMethod()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;BeginInvokeSynchronousActionMethod&gt;b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__3d()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;&gt;c__DisplayClass46.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__3f()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass33.&lt;BeginInvokeActionMethodWithFilters&gt;b__32(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass21.&lt;&gt;c__DisplayClass2b.&lt;BeginInvokeAction&gt;b__1c()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass21.&lt;BeginInvokeAction&gt;b__1e(IAsyncResult asyncResult)" user="rishatdfsd" time="2016-03-30T16:05:18.0906999Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate, sdch&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;HTTP_COOKIE:__RequestVerificationToken=M2LqQ8hbjlyrX-guY_BurvtCOSDvf895783YfTY4h2sVhZU52x4d9nlxi-xT-89aouiAdRJ0HYpkGEhZFdyQtQT8qhxbLXUDKk4CMVJUOAc1; .AspNet.ApplicationCookie=FNJtnPC_T_R1lLUchcO_EFmY9rwWqDUu6F9EyVcEdHlED4zMXoKl-jq_3AyZeI8tF5uCcr8MRLXbBvPxZrq8q2rHptU6qlTINDMYR887f55JHrad-HReMMURvuNmoqMkhMTmTxFnpKIE-WKiDLggsUxj1_8PxhUZSkJcjroRhtsir5ZD_AHIlTuG-1O_XDSQMrXXeJ9Kx97CdfTKKgGC1KTZeFeeUI-RQ1WglVT_NLozQY8ESjdZmQmgY2aNhK0ZaeYtiF-3YcDMEnHtCbjcbf7O-CFtcW0BuE9PKoh02KQDZQgD33gR-L3sGBhQxJrzs7d2ie1MXw3ouCBNEqxvub3VLy933RF5TLAhJzS7LmcoXlY2Nq1-QQ7De7Nm0QXGIllvfFuWiHwslDbM7hyBgKzp5Xc1oiNLodelWHuAexp_WN8y5_2zYVaCQkhbPzD83mMSil2H5k15vJbAXuXdOh-BvNy-MdXGOM9zb8lX1U20a_kkrzw29O0MfIlPJZSylLMM3DBNiMS0cA5w8Al39HVP1x_Sg_kyJyMczodruliMkVdg5l0Bm4aRFxcyTE1P; ASP.NET_SessionId=zizrabshtuljotzxuhkgeapi&#xD;&#xA;HTTP_HOST:rishatdfsd.localhost:13917&#xD;&#xA;HTTP_REFERER:http://rishatdfsd.localhost:13917/Home/Events&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36&#xD;&#xA;HTTP_UPGRADE_INSECURE_REQUESTS:1&#xD;&#xA;HTTP_X_COMPRESS:null&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;Accept-Encoding: gzip, deflate, sdch&#xD;&#xA;Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;Cookie: __RequestVerificationToken=M2LqQ8hbjlyrX-guY_BurvtCOSDvf895783YfTY4h2sVhZU52x4d9nlxi-xT-89aouiAdRJ0HYpkGEhZFdyQtQT8qhxbLXUDKk4CMVJUOAc1; .AspNet.ApplicationCookie=FNJtnPC_T_R1lLUchcO_EFmY9rwWqDUu6F9EyVcEdHlED4zMXoKl-jq_3AyZeI8tF5uCcr8MRLXbBvPxZrq8q2rHptU6qlTINDMYR887f55JHrad-HReMMURvuNmoqMkhMTmTxFnpKIE-WKiDLggsUxj1_8PxhUZSkJcjroRhtsir5ZD_AHIlTuG-1O_XDSQMrXXeJ9Kx97CdfTKKgGC1KTZeFeeUI-RQ1WglVT_NLozQY8ESjdZmQmgY2aNhK0ZaeYtiF-3YcDMEnHtCbjcbf7O-CFtcW0BuE9PKoh02KQDZQgD33gR-L3sGBhQxJrzs7d2ie1MXw3ouCBNEqxvub3VLy933RF5TLAhJzS7LmcoXlY2Nq1-QQ7De7Nm0QXGIllvfFuWiHwslDbM7hyBgKzp5Xc1oiNLodelWHuAexp_WN8y5_2zYVaCQkhbPzD83mMSil2H5k15vJbAXuXdOh-BvNy-MdXGOM9zb8lX1U20a_kkrzw29O0MfIlPJZSylLMM3DBNiMS0cA5w8Al39HVP1x_Sg_kyJyMczodruliMkVdg5l0Bm4aRFxcyTE1P; ASP.NET_SessionId=zizrabshtuljotzxuhkgeapi&#xD;&#xA;Host: rishatdfsd.localhost:13917&#xD;&#xA;Referer: http://rishatdfsd.localhost:13917/Home/Events&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36&#xD;&#xA;Upgrade-Insecure-Requests: 1&#xD;&#xA;X-Compress: null&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/2/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="D:\My documents\Visual Studio 2015\Projects\bbom\Admin\bbom.Admin\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="ApplicationCookie" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="rishatdfsd" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="*****" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="rishatdfsd" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="2" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/2" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Events" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="D:\My documents\Visual Studio 2015\Projects\bbom\Admin\bbom.Admin\Events" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="id=14" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="46421" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Events" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="rishatdfsd.localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="13917" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/10.0" />
+    </item>
+    <item name="URL">
+      <value string="/Events" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate, sdch" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="__RequestVerificationToken=M2LqQ8hbjlyrX-guY_BurvtCOSDvf895783YfTY4h2sVhZU52x4d9nlxi-xT-89aouiAdRJ0HYpkGEhZFdyQtQT8qhxbLXUDKk4CMVJUOAc1; .AspNet.ApplicationCookie=FNJtnPC_T_R1lLUchcO_EFmY9rwWqDUu6F9EyVcEdHlED4zMXoKl-jq_3AyZeI8tF5uCcr8MRLXbBvPxZrq8q2rHptU6qlTINDMYR887f55JHrad-HReMMURvuNmoqMkhMTmTxFnpKIE-WKiDLggsUxj1_8PxhUZSkJcjroRhtsir5ZD_AHIlTuG-1O_XDSQMrXXeJ9Kx97CdfTKKgGC1KTZeFeeUI-RQ1WglVT_NLozQY8ESjdZmQmgY2aNhK0ZaeYtiF-3YcDMEnHtCbjcbf7O-CFtcW0BuE9PKoh02KQDZQgD33gR-L3sGBhQxJrzs7d2ie1MXw3ouCBNEqxvub3VLy933RF5TLAhJzS7LmcoXlY2Nq1-QQ7De7Nm0QXGIllvfFuWiHwslDbM7hyBgKzp5Xc1oiNLodelWHuAexp_WN8y5_2zYVaCQkhbPzD83mMSil2H5k15vJbAXuXdOh-BvNy-MdXGOM9zb8lX1U20a_kkrzw29O0MfIlPJZSylLMM3DBNiMS0cA5w8Al39HVP1x_Sg_kyJyMczodruliMkVdg5l0Bm4aRFxcyTE1P; ASP.NET_SessionId=zizrabshtuljotzxuhkgeapi" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="rishatdfsd.localhost:13917" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://rishatdfsd.localhost:13917/Home/Events" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36" />
+    </item>
+    <item name="HTTP_UPGRADE_INSECURE_REQUESTS">
+      <value string="1" />
+    </item>
+    <item name="HTTP_X_COMPRESS">
+      <value string="null" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="id">
+      <value string="14" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="__RequestVerificationToken">
+      <value string="M2LqQ8hbjlyrX-guY_BurvtCOSDvf895783YfTY4h2sVhZU52x4d9nlxi-xT-89aouiAdRJ0HYpkGEhZFdyQtQT8qhxbLXUDKk4CMVJUOAc1" />
+    </item>
+    <item name=".AspNet.ApplicationCookie">
+      <value string="FNJtnPC_T_R1lLUchcO_EFmY9rwWqDUu6F9EyVcEdHlED4zMXoKl-jq_3AyZeI8tF5uCcr8MRLXbBvPxZrq8q2rHptU6qlTINDMYR887f55JHrad-HReMMURvuNmoqMkhMTmTxFnpKIE-WKiDLggsUxj1_8PxhUZSkJcjroRhtsir5ZD_AHIlTuG-1O_XDSQMrXXeJ9Kx97CdfTKKgGC1KTZeFeeUI-RQ1WglVT_NLozQY8ESjdZmQmgY2aNhK0ZaeYtiF-3YcDMEnHtCbjcbf7O-CFtcW0BuE9PKoh02KQDZQgD33gR-L3sGBhQxJrzs7d2ie1MXw3ouCBNEqxvub3VLy933RF5TLAhJzS7LmcoXlY2Nq1-QQ7De7Nm0QXGIllvfFuWiHwslDbM7hyBgKzp5Xc1oiNLodelWHuAexp_WN8y5_2zYVaCQkhbPzD83mMSil2H5k15vJbAXuXdOh-BvNy-MdXGOM9zb8lX1U20a_kkrzw29O0MfIlPJZSylLMM3DBNiMS0cA5w8Al39HVP1x_Sg_kyJyMczodruliMkVdg5l0Bm4aRFxcyTE1P" />
+    </item>
+    <item name="ASP.NET_SessionId">
+      <value string="zizrabshtuljotzxuhkgeapi" />
+    </item>
+  </cookies>
+</error>

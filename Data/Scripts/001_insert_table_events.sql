@@ -1,0 +1,7 @@
+CREATE TABLE bbomDb.dbo.Events (
+  Id INT PRIMARY KEY NOT NULL,
+  Title VARCHAR(128),
+  StartDate DATE,
+  EndDate DATE NOT NULL,
+  Url VARCHAR NOT NULL
+);

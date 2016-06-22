@@ -1,0 +1,8 @@
+﻿class EventsView {
+
+    constructor() {}
+
+    fillTimeLine() {
+        
+    }
+}

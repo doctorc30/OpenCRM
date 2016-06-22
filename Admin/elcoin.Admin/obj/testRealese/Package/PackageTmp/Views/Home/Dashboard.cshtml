@@ -1,0 +1,208 @@
+﻿@using System.Configuration
+@using bbom.Admin.Core.Extensions
+@model bbom.Admin.Core.ViewModels.Home.DashboardViewModel
+@{
+    ViewBag.Title = "Ваша статистика";
+}
+<style>
+    .row {
+        margin-left: 0px;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">@ViewBag.Title</h1>
+    </div>
+</div><!--/.row-->
+
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-lg-3">
+        <div class="panel panel-blue panel-widget ">
+            <div class="row no-padding">
+                <div class="col-sm-3 col-lg-5 widget-left">
+                    <svg class="glyph stroked bag"><use xlink:href="#stroked-male-user"></use></svg>
+                </div>
+                <div class="col-sm-9 col-lg-7 widget-right">
+                    <div class="large">@Model.AllUsersCount</div>
+                    <div class="text-muted">Вся структура</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-3">
+        <div class="panel panel-orange panel-widget">
+            <div class="row no-padding">
+                <div class="col-sm-3 col-lg-5 widget-left">
+                    <svg class="glyph stroked empty-message"><use xlink:href="#stroked-male-user"></use></svg>
+                </div>
+                <div class="col-sm-9 col-lg-7 widget-right">
+                    <div class="large">@Model.ChildrenUsersCount</div>
+                    <div class="text-muted">Моя структура</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-3">
+        <div class="panel panel-teal panel-widget">
+            <div class="row no-padding">
+                <div class="col-sm-3 col-lg-5 widget-left">
+                    <svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>
+                </div>
+                <div class="col-sm-9 col-lg-7 widget-right">
+                    <div class="large">0</div>
+                    <div class="text-muted">Новые польз.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="col-xs-12 col-md-6 col-lg-3">
+        <div class="panel panel-red panel-widget">
+            <div class="row no-padding">
+                <div class="col-sm-3 col-lg-5 widget-left">
+                    <svg class="glyph stroked app-window-with-content"><use xlink:href="#stroked-app-window-with-content"></use></svg>
+                </div>
+                <div class="col-sm-9 col-lg-7 widget-right">
+                    <div class="large">25.2k</div>
+                    <div class="text-muted">Просмотры</div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+</div><!--/.row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Ваша реферальная ссылка </div>
+            <div class="panel-body">
+                <div>
+                    <h4>Страница регистрации ваших клиентов: <a id="userLink"></a></h4>
+                    <h4>Ваш сайт: <a id="userLinkPage"></a></h4>
+                    @*<a href="@Url.Action("Index", "PersonalPageCreator")"><input type="button" value="Создать персональную страницу регистрации"/></a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--/.row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Ваш родительский пользователь</div>
+            <div class="panel-body">
+                <div>
+                    <h3>@(Model.User.AspNetUser1 == null ? "" : Model.User.AspNetUser1.UserName)</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--/.row-->
+
+<div class="row">
+    <div class="col-md-8">
+
+        <div class="panel panel-default chat">
+            <div class="panel-heading" id="accordion">
+                <svg class="glyph stroked two-messages"><use xlink:href="#stroked-two-messages"></use></svg> Новости
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li class="left clearfix">
+                        <span class="chat-img pull-left">
+                            <img src="http://placehold.it/80/30a5ff/fff" alt="User Avatar" class="img-circle" />
+                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">Solomon</strong> <small class="text-muted">30.03.2016</small>
+                            </div>
+                            <p>
+                                Новость 1.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="right clearfix">
+                        <span class="chat-img pull-right">
+                            <img src="http://placehold.it/80/dde0e6/5f6468" alt="User Avatar" class="img-circle" />
+                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="pull-left primary-font">Solomon</strong> <small class="text-muted">30.03.2016</small>
+                            </div>
+                            <p>
+                                Новость 2.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="left clearfix">
+                        <span class="chat-img pull-left">
+                            <img src="http://placehold.it/80/30a5ff/fff" alt="User Avatar" class="img-circle" />
+                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">Solomon</strong> <small class="text-muted">30.03.2016</small>
+                            </div>
+                            <p>
+                                Новость 3.
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div><!--/.col-->
+
+    <div class="col-md-4">
+
+        <div class="panel panel-blue">
+            <div class="panel-heading dark-overlay">
+                <svg class="glyph stroked clipboard-with-paper"><use xlink:href="#stroked-clipboard-with-paper"></use></svg>Задачи
+            </div>
+            <div class="panel-body">
+                <ul id="todoList" class="todo-list">
+
+                </ul>
+            </div>
+        </div>
+
+    </div><!--/.col-->
+</div><!--/.row-->
+
+
+@section Scripts
+{
+    <script id="taskTmpl" type="text/x-jquery-tmpl">
+        <li class="todo-list-item">
+            <div class="checkbox">
+                <input type="checkbox" id="checkbox${taskId}" data-id="${taskId}" style="margin-left: 0;bottom: 7px;"/>
+                <label for="checkbox${taskId}">${name}</label>
+            </div>
+        </li>
+    </script>
+    <script>
+        $("#userLink").attr('href', window.GetUrl('/Account/Register?id=@User.GetUserId()'));
+        $("#userLink").text(window.GetUrl('/Account/Register?id=@User.GetUserId()'));
+        $("#userLinkPage").text('@ConfigurationManager.AppSettings["DomainShort"]');
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetAll", "Tasks")",
+            success: function(json) {
+                for (var i = 0; i < json.length; i++) {
+                    $('#taskTmpl').tmpl(json[i]).appendTo('#todoList');
+                    $('#checkbox' + json[i].taskId).prop('checked', json[i].state);
+                    $('#checkbox' + json[i].taskId).on('change', function () {
+                        var value = $(this).prop('checked');
+                        var id = $(this).attr('data-id');
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("Select", "Tasks")" + "?taskId=" + id + "&state=" + value,
+                            success: function(noty) {
+                                window.notify(noty);
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,9 @@
+﻿<h1>@ViewBag.Message</h1>
+<h1>Для продолжения работы в бизнесе свяжитесь с вашим спонсором с помощью раздела "Контакты".</h1>
+<script>
+    setTimeout(function () {
+        if (@(ViewBag.Update ?? 1) !== 0) {
+            window.location.reload(1);
+        }
+    }, 3000);
+</script>

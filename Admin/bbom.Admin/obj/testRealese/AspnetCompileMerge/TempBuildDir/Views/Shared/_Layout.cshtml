@@ -1,0 +1,146 @@
+﻿@using System.Configuration
+@using bbom.Admin.Code.Extensions
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>bbom - @ViewBag.Title</title>
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <!--SignalR -->
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/Utils/signalr.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+    <!--Select2-->
+    <link rel="stylesheet" type="text/css" href="/Content/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap-responsive.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.1.0/css/select.bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/pnotify/pnotify.custom.min.css"/>
+    <link type="text/css" rel="stylesheet" href="~/Content/Buttons/component.css">
+    @*<link type="text/css" rel="stylesheet" href="~/Content/Buttons/base.css">*@
+    <link type="text/css" rel="stylesheet" href="~/Content/Buttons/buttons.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Buttons/normalize.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Buttons/vicons-font.css">
+    <link href="~/Content/vis.css" rel="stylesheet">
+    <link href="~/Content/styles.css" rel="stylesheet">
+    @*<link href="~/Content/icons/ionicons.css" rel="stylesheet">*@
+    <link href="~/Content/fullcalendar.css" rel="stylesheet">
+    <!--DialogElement-->
+    <link rel="stylesheet" type="text/css" href="~/Content/DialogElement/style.css"/>
+    <link rel="stylesheet" type="text/css" href="~/Content/DialogElement/dialog.css"/>
+    <!--Icons-->
+    <script src="~/Scripts/lumino.glyphs.js"></script>
+    <!--jqueryUI-->
+    <link rel="stylesheet" type="text/css" href="~/Content/jqueryUI/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/jqueryUI/jquery-ui.structure.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/jqueryUI/jquery-ui.theme.min.css"/>
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css"/>
+    <!--[if lt IE 9]>
+        <script src="~/Scripts/html5shiv.js"></script>
+        <script src="~/Scripts/respond.min.js"></script><![endif]-->
+
+    <script>
+        var currentUserRole = '@User.Identity.GetUserRoles()'.split(",");
+
+        $(function () {
+           
+        });
+
+        function userIsRole(roleName) {
+            for (var i = 0; i < currentUserRole.length; i++) {
+                if (currentUserRole[i] === roleName) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function notify(data) {
+            new PNotify({
+                text: data.message,
+                type: data.type,
+                shadow: false,
+                styling: 'bootstrap3'
+            });
+        }
+
+        var http = "http://";
+
+        function GetPostUrl(id) {
+            return http + id + "." + "@ConfigurationManager.AppSettings["Domain"]";
+        }
+
+        function GetActionUrl(controler, action) {
+            return http + "www." + "@ConfigurationManager.AppSettings["Domain"]" + "/" + controler + "/" + action;
+        }
+
+        function GetUrl(subdomain, path) {
+            return http + subdomain + "." + "@ConfigurationManager.AppSettings["Domain"]" + path;
+        }
+    </script>
+    <script>
+        !function ($) {
+            $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
+                $(this).find('em:first').toggleClass("glyphicon-minus");
+            });
+            $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+        }(window.jQuery);
+
+        $(window).on('resize', function () {
+            if ($(window).width() > 768) $('#sidebar-collapse').collapse('show');
+        });
+        $(window).on('resize', function () {
+            if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide');
+        });
+    </script>
+
+</head>
+
+
+<body>
+<!--Header-->
+@{
+    Html.RenderPartial("_Header");
+}
+<!--Sidebar-->
+@{
+    Html.RenderPartial("_Menu");
+}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    @RenderBody()
+</div> <!--/.main-->
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/chart.min.js"></script>
+<script src="~/Scripts/vis.js"></script>
+<script src="~/Scripts/moment.min.js"></script>
+<script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.js"></script>
+<script src="~/Scripts/fullcalendar.js"></script>
+<script src="~/Scripts/fullcalendar-rightclick.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.1/js/buttons.bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/select/1.1.0/js/dataTables.select.min.js"></script>
+<script src="~/Scripts/pnotify/pnotify.custom.min.js"></script>
+<!--DialogElement-->
+<script src="~/Scripts/DialogElement/draggabilly.pkgd.min.js"></script>
+<script src="~/Scripts/DialogElement/dynamics.min.js"></script>
+<script src="~/Scripts/DialogElement/main.js"></script>
+<!--jqueryUI-->
+<script src="~/Scripts/jqueryUI/jquery-ui.min.js"></script>
+<!--Select2-->
+<script type="text/javascript" src="/Scripts/select2.full.min.js"></script>
+<script type="text/javascript" src="/Scripts/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/Scripts/jQuery.tmpl.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.liTranslit.js"></script>
+<script type="text/javascript" src="/Scripts/MicrosoftAjax.js"></script>
+<script type="text/javascript" src="/Scripts/MicrosoftMvcAjax.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+﻿@using System.Configuration
+@model bbom.Data.Model.Payment
+@{
+    ViewBag.Title = "Платеж";
+}
+<div class="panel panel-primary" style="margin-top: 20px">
+    <div class="panel-heading">@ViewBag.Title</div>
+    <div class="panel-body">
+        <div class="form-group">
+                @if (Model.Amount != 0)
+                {
+                    <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                        <div class="panel panel-info">
+                            <strong>Цена</strong>
+                            @Model.Amount.ToString("####.##") руб.<br/>
+                        </div>
+                        <input name="label" value="@Model.Id" type="hidden">
+                        <input name="receiver" value="41001530808864" type="hidden">
+                        <input name="quickpay-form" value="shop" type="hidden">
+                        <input type="hidden" name="targets" value="Оплата заказа @Model.Id">
+                        <label for="sum">Сумма: </label>
+                        <br/>
+                        @Model.Amount.ToString("####.##") руб.
+                        <input name="sum" value="@Model.Amount" maxlength="10" data-type="number" type="hidden">
+                        <br/>
+                        <br/>
+                        <label for="sum">Способ оплаты: </label>
+                        <br/>
+                        <input type="radio" name="paymentType" value="AC"> Карта
+                        <input type="radio" name="paymentType" value="PC"> ЯД
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Оплатить" class="btn btn-default"/>
+                            </div>
+                        </div>
+                        <input name="successURL"
+                               value="@("http://" + User.Identity.Name +"." + @ConfigurationManager.AppSettings["Domain"])"
+                               type="hidden">
+                        <input name="quickpay-back-url"
+                               value="@("http://" + User.Identity.Name +"." + @ConfigurationManager.AppSettings["Domain"])"
+                               type="hidden">
+                    </form>
+                }
+                else
+                {
+                    using (Html.BeginForm("PayPost", "Payment", new {id = Model.Id, Amount = Model.Amount}, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="panel panel-info">
+                            <strong>Цена</strong>
+                            @Model.Amount.ToString("####.##") руб.
+                            <br />
+                        </div>
+                        <input name="label" value="@Model.Id" type="hidden">
+                        <input name="receiver" value="41001530808864" type="hidden">
+                        <input name="quickpay-form" value="shop" type="hidden">
+                        <input type="hidden" name="targets" value="Оплата заказа @Model.Id">
+                        <label for="sum">Сумма: </label>
+                        <br />
+                        @(Model.Amount.ToString("####.##"))<span>руб.</span>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type = "submit" value="Оплатить" class="btn btn-default" />
+                            </div>
+                        </div>
+                    }
+                }
+</div>
+    </div>
+</div>

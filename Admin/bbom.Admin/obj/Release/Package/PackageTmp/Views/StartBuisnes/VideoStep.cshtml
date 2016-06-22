@@ -1,0 +1,38 @@
+﻿@model bbom.Admin.Core.ViewModels.StartBuisnes.VideoStepViewModel
+
+@{
+    ViewBag.Title = "Обучение";
+}
+<div class="panel panel-primary" style="margin-top: 20px">
+    <div class="panel-heading">@ViewBag.Title</div>
+    <div class="panel-body">
+        <div id="player"></div>
+        @Model.Link
+        <a href="@Model.Link">@Model.LinkName</a>
+        @using (Html.BeginForm("VideoStep", "StartBuisnes", FormMethod.Post))
+        {
+            <input type="submit" value="Пропустить" />
+        }
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: 'tGU3Pu8Cado'
+            });
+        }
+    </script>
+}
+

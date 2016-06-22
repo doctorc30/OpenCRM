@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "";
+}
+<div class="panel panel-primary" style="margin-top: 20px">
+    <div class="panel-heading">@ViewBag.Title</div>
+    <div class="panel-body">
+        <div class="form-group">
+            @using (Html.BeginForm("Index", "Payment", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                //@Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Оплатить" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

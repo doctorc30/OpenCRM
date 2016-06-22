@@ -1,0 +1,19 @@
+﻿<h4>Платеж из http @ViewBag.PaymentId</h4>
+<h4>юзер из http @ViewBag.UserId</h4>
+<h4>план из http @ViewBag.PlanId</h4>
+<h4>скидка из http @ViewBag.DiscauntId</h4>
+@section Scripts
+{
+    <script>
+        @*$(document).ready(function() {
+            $.ajax({
+                type: "POST",
+                data: {
+                    id: "@ViewBag.PaymentId",
+                    payment: 10
+                },
+                url: '@Url.Action("TestPaidPost", "Payment")'
+            });
+        });*@
+    </script>
+}

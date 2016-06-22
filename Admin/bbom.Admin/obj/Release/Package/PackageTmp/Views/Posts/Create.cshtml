@@ -1,0 +1,90 @@
+﻿@*@model UshakovaWebsite.Data.Model.post*@
+
+@{
+    ViewBag.Title = "Новый пост";
+}
+<form role="form">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.short_story@*, htmlAttributes: new { @class = "control-label col-md-2" }*@)
+        @*@Html.EditorFor(model => model.short_story, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.short_story, "", new { @class = "text-danger" })*@
+        <textarea id="short_story" class="form-control text-danger"></textarea>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.full_story@*, htmlAttributes: new { @class = "control-label col-md-2" }*@)
+        @*@Html.EditorFor(model => model.full_story, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.full_story, "", new { @class = "text-danger" })*@
+        <textarea id="full_story" class="form-control text-danger"></textarea>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.title@*, htmlAttributes: new { @class = "control-label col-md-2" }*@)
+        @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control", id = "model_title" } })
+        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.category@*, htmlAttributes: new { @class = "control-label col-md-2" }*@)
+        <div>
+            <ul class="nav nav-pills">
+                <li class="dropdown">
+                    <a id="categorysTitle" class="dropdown-toggle" data-toggle="dropdown" href="#">Категории<b class='caret'></b></a>
+                    <ul id="categorys" class="dropdown-menu"></ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.image_link@*, htmlAttributes: new { @class = "control-label col-md-2" }*@)
+        @Html.EditorFor(model => model.image_link, new { htmlAttributes = new { @class = "form-control", id = "image_link" } })
+        @Html.ValidationMessageFor(model => model.image_link, "", new { @class = "text-danger" })
+    </div>
+</form>
+<div class="form-group">
+    <input type="button" value="Create" class="btn btn-default" onclick="submit()" />
+</div>
+@section Scripts {
+    @*<script>
+        var categoryId;
+
+        function submit() {
+            var title = $("#model_title").val();
+            var fullStore = $("#full_story").getBBCode();
+            var shortStory = $("#short_story").getBBCode();
+            var image = $("#image_link").val();
+            $.post("@Url.Action("Create", "Posts")", {
+                title: title,
+                full_story: fullStore,
+                short_story: shortStory,
+                image_link: image,
+                category: categoryId
+            }, function () {
+                document.location.replace("@Url.Action("Index")");
+            });
+        };
+
+        function selectcat(a) {
+            $("#categorysTitle").html(a.text + "<b class='caret'></b>");
+            categoryId = a.name;
+        }
+
+        $(function () {
+            $("#full_story").wysibb();
+            $("#short_story").wysibb();
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetCategorys", "Posts")",
+                success: function (json) {
+                    for (var i = 0; i < json.Categorys.length; i++) {
+                        var cat = json.Categorys[i];
+                        $("#categorys").append("<li><a onclick='selectcat(this)' name='" + cat.Id + "'>" + cat.Name + "</a></li>");
+                    }
+                }
+            });
+        });
+    </script>*@
+    @Scripts.Render("~/bundles/jqueryval")
+}

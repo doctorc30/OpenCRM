@@ -1,0 +1,30 @@
+﻿@model bbom.Admin.Core.ViewModels.Home.ContactViewModel
+@{
+    ViewBag.Title = "Контакты";
+    ViewBag.Message = "";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<address>
+    <strong>Ваш спонсор: @Model.InvitedFio</strong>
+    <br/>
+    <img id="userImage" style="height: 200px" src='@(Url.Action( "GetProfileUserImage", "Manage") + "?userId=" + Model.InvitedId)'/>
+    <br/>
+    <br/>
+    <a href="@Model.Link">Реферальная ссылка bbom</a>
+    <br />
+    <abbr title="Phone"><strong>Телефон:</strong></abbr>
+    @Model.Phone<br />
+    <abbr title="E-mail"><strong>Электронная почта:</strong></abbr>
+    @Model.Email<br />
+    @foreach (var uc in Model.Comms)
+    {
+        <abbr title=""><strong>@uc.Communicatio.Name:</strong></abbr>
+        @uc.Value<br/>
+    }
+</address>
+
+<address>
+    <strong>Тех. Поддержка сервиса Solomon:</strong>   <a href="mailto:Support@example.com">info@solomon24.com</a><br />
+</address>
