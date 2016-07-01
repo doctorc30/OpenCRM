@@ -3,3 +3,9 @@
 ################################################################################
 
 /Admin/bbom.Admin/obj/Debug
+/Admin/bbom.Admin.Core/obj/Debug
+/Admin/bbom.Admin.Test/obj/Debug
+/Admin/elcoin.Admin/obj/Debug
+/Data/bbom.Data/obj/Debug
+/IdentityServer/obj/Debug
+/Solomon.Core.Test/obj/Debug

@@ -7,7 +7,7 @@ namespace bbom.Admin.Core.Services.EmailService
         public void SendMail(string emailTo, string title, string body, bool isHtmlBody)
         {
             // наш email с заголовком письма
-            MailAddress from = new MailAddress("mail@doctor-c.ru", title);
+            MailAddress from = new MailAddress("", title);
             // кому отправляем
             MailAddress to = new MailAddress(emailTo);
             // создаем объект сообщения
@@ -22,7 +22,7 @@ namespace bbom.Admin.Core.Services.EmailService
             // адрес smtp-сервера, с которого мы и будем отправлять письмо
             SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 587)
             {
-                Credentials = new System.Net.NetworkCredential("mail@doctor-c.ru", "306418"),
+                Credentials = new System.Net.NetworkCredential("", ""),
                 EnableSsl = true
             };
             // логин и пароль
@@ -32,7 +32,7 @@ namespace bbom.Admin.Core.Services.EmailService
         public void SendMail(MailMessage message)
         {
             // наш email с заголовком письма
-            MailAddress from = new MailAddress("error@doctor-c.ru");
+            MailAddress from = new MailAddress("");
 
             message.From = from;
             // тема письма
@@ -40,7 +40,7 @@ namespace bbom.Admin.Core.Services.EmailService
             // адрес smtp-сервера, с которого мы и будем отправлять письмо
             SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 587)
             {
-                Credentials = new System.Net.NetworkCredential("error@doctor-c.ru", "306418"),
+                Credentials = new System.Net.NetworkCredential("", ""),
                 EnableSsl = true
             };
             // логин и пароль

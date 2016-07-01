@@ -129,7 +129,7 @@ namespace bbom.Admin.Core.DataExtensions.Helpers.Impl
         public void SendConfimMail(string email, string confimUrl)
         {
             // наш email с заголовком письма
-            MailAddress from = new MailAddress("mail@doctor-c.ru", "Web Registration");
+            MailAddress from = new MailAddress("", "Web Registration");
             // кому отправляем
             MailAddress to = new MailAddress(email);
             // создаем объект сообщения
@@ -145,7 +145,7 @@ namespace bbom.Admin.Core.DataExtensions.Helpers.Impl
             // адрес smtp-сервера, с которого мы и будем отправлять письмо
             SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 587)
             {
-                Credentials = new System.Net.NetworkCredential("mail@doctor-c.ru", "306418"),
+                Credentials = new System.Net.NetworkCredential("", ""),
                 EnableSsl = true
             };
             // логин и пароль

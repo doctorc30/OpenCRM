@@ -224,7 +224,7 @@ namespace bbom.Admin.Controllers
                                                     "\ncodepro " + codepro +
                                                     "\nunaccepted " + unaccepted +
                                                     "\ntest_notification " + test_notification);
-            string key = "l1jFBg7mbiobVAlvkt4pkS6U";
+            string key = "";
             var ymOptions = new YandexMoneyOptions
             {
                 datetime = datetime,

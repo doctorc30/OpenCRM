@@ -224,7 +224,7 @@ namespace elcoin.Admin.Controllers
                                                     "\ncodepro " + codepro +
                                                     "\nunaccepted " + unaccepted +
                                                     "\ntest_notification " + test_notification);
-            string key = "2TCUyBM/oWITQ64VJYDl8pY5";
+            string key = "";
             var ymOptions = new YandexMoneyOptions
             {
                 datetime = datetime,
